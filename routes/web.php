@@ -16,6 +16,7 @@ Route::get('/about', [LandingController::class, 'about'])->name('about');
 Route::get('/gallery', [LandingController::class, 'gallery'])->name('gallery');
 Route::get('/showcase', [LandingController::class, 'showcase'])->name('showcase');
 Route::get('/struktur', [LandingController::class, 'struktur'])->name('struktur');
+Route::get('/struktur/{slug}', [LandingController::class, 'strukturDetail'])->name('struktur.detail');
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,9 @@ Route::post('/logout', [AuthController::class, 'logout'])
 */
 Route::middleware(['auth', 'approved'])->prefix('dashboard')->group(function (): void {
     Route::get('/', [UserDashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/borrowing/create', [UserDashboardController::class, 'createBorrowing'])->name('user.borrowing.create');
     Route::post('/borrowing', [UserDashboardController::class, 'storeBorrowing'])->name('user.borrowing.store');
+    Route::get('/booking/create', [UserDashboardController::class, 'createBooking'])->name('user.booking.create');
     Route::post('/booking', [UserDashboardController::class, 'storeBooking'])->name('user.booking.store');
     Route::get('/calendar', [UserDashboardController::class, 'bookingCalendar'])->name('user.calendar');
 });

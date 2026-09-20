@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Hero Section --}}
-    <section class="relative flex min-h-screen items-center overflow-hidden pt-16" id="hero">
+    <section class="relative flex min-h-screen items-center overflow-hidden" id="hero">
         {{-- Background Image --}}
         <div class="absolute inset-0 z-0">
             <img src="{{ asset('images/hero-bg.jpg') }}" alt="Smecone Music Members" class="h-full w-full object-cover">

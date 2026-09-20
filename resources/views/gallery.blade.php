@@ -3,7 +3,7 @@
 @section('title', 'Galeri Kegiatan - Smecone Music')
 
 @section('content')
-    <div class="bg-gradient-to-b from-gray-900 to-brand-950 py-20 text-white sm:py-28">
+    <div class="bg-gradient-to-b from-gray-900 to-brand-950 pt-28 pb-20 text-white sm:pt-36 sm:pb-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
                 <span class="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand-200 backdrop-blur-md">Dokumentasi</span>

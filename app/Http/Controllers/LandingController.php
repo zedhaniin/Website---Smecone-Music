@@ -39,8 +39,37 @@ class LandingController extends Controller
 
     public function struktur(): View
     {
-        return view('struktur', [
-            'members' => MemberStructure::orderBy('order')->orderBy('id')->get(),
-        ]);
+        $allMembers = MemberStructure::orderBy('order')->orderBy('id')->get();
+        $divisionDefs = MemberStructure::getDivisionDefinitions();
+
+        $divisions = [];
+        foreach ($divisionDefs as $slug => $def) {
+            $members = $allMembers->filter(function ($member) use ($def) {
+                return $member->division_group === $def['db_group'];
+            });
+
+            $divisions[] = array_merge($def, [
+                'members' => $members->values(),
+            ]);
+        }
+
+        return view('struktur', compact('divisions'));
+    }
+
+    public function strukturDetail(string $slug): View
+    {
+        $divisionDefs = MemberStructure::getDivisionDefinitions();
+
+        if (! isset($divisionDefs[$slug])) {
+            abort(404);
+        }
+
+        $division = $divisionDefs[$slug];
+        $allMembers = MemberStructure::orderBy('order')->orderBy('id')->get();
+        $members = $allMembers->filter(function ($member) use ($division) {
+            return $member->division_group === $division['db_group'];
+        })->values();
+
+        return view('struktur-detail', compact('division', 'members'));
     }
 }

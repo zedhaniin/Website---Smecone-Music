@@ -31,4 +31,19 @@ class MemberStructureTest extends TestCase
         $this->assertEquals('Wakil Test', $orderedMembers[1]->name);
         $this->assertEquals('Anggota Test', $orderedMembers[2]->name);
     }
+
+    public function test_division_detail_page_returns_successful_response(): void
+    {
+        MemberStructure::create(['name' => 'Ketua Test', 'position' => 'Ketua']);
+
+        $responseInti = $this->get('/struktur/pengurus-inti');
+        $responseInti->assertStatus(200);
+        $responseInti->assertSee('Ketua Test');
+
+        $responseHumas = $this->get('/struktur/humas');
+        $responseHumas->assertStatus(200);
+
+        $responseInvalid = $this->get('/struktur/divisi-tidak-ada');
+        $responseInvalid->assertStatus(404);
+    }
 }

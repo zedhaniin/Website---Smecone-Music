@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@smecone.music'],
             [
-                'name' => 'Admin Smecone',
+                'name' => 'Admin Music',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
                 'is_approved' => true,
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'perkap@smecone.music'],
             [
-                'name' => 'Perkap Smecone',
+                'name' => 'Perkap Music',
                 'password' => Hash::make('password'),
                 'role' => 'perkap',
                 'is_approved' => true,
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'user@smecone.music'],
             [
-                'name' => 'Anggota Smecone',
+                'name' => 'Anggota Music',
                 'password' => Hash::make('password'),
                 'role' => 'user',
                 'is_approved' => true,

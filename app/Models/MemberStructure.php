@@ -17,7 +17,7 @@ class MemberStructure extends Model
     ];
 
     public static array $positions = [
-        'Pengurus Harian' => [
+        'Pengurus Inti' => [
             'Ketua' => 'Ketua',
             'Wakil' => 'Wakil',
             'Sekretaris 1' => 'Sekretaris 1',
@@ -94,31 +94,93 @@ class MemberStructure extends Model
     public function getDivisionGroupAttribute(): string
     {
         if (in_array($this->position, ['Ketua', 'Wakil', 'Sekretaris 1', 'Sekretaris 2', 'Bendahara 1', 'Bendahara 2'])) {
-            return 'Pengurus Harian';
+            return 'Pengurus Inti';
         }
         if (str_contains($this->position, 'Humas')) {
-            return 'Humas';
+            return 'Divisi Humas';
         }
         if (str_contains($this->position, 'Alat Musik')) {
-            return 'Alat Musik';
+            return 'Divisi Alat Musik';
         }
         if (str_contains($this->position, 'Vocal')) {
-            return 'Vocal';
+            return 'Divisi Vocal';
         }
         if (str_contains($this->position, 'Kegiatan')) {
-            return 'Kegiatan';
+            return 'Divisi Kegiatan';
         }
         if (str_contains($this->position, 'PDD')) {
-            return 'PDD';
+            return 'Divisi PDD';
         }
         if (str_contains($this->position, 'Perkap')) {
-            return 'Perkap';
+            return 'Divisi Perkap';
         }
         if (str_contains($this->position, 'Wirausaha')) {
-            return 'Wirausaha';
+            return 'Divisi Wirausaha';
         }
 
         return 'Divisi';
+    }
+
+    public static function getDivisionDefinitions(): array
+    {
+        return [
+            'pengurus-inti' => [
+                'slug' => 'pengurus-inti',
+                'name' => 'Pengurus Inti',
+                'category' => 'Pimpinan & Pengurus Inti',
+                'description' => 'Pemegang amanah tertinggi dalam pengambilan kebijakan strategis dan penentu arah gerak organisasi Smecone Music.',
+                'db_group' => 'Pengurus Inti',
+            ],
+            'humas' => [
+                'slug' => 'humas',
+                'name' => 'Divisi Humas',
+                'category' => 'Pengurus Harian',
+                'description' => 'Menjalin komunikasi, membangun relasi publik, serta menjaga citra positif organisasi Smecone Music.',
+                'db_group' => 'Divisi Humas',
+            ],
+            'alat-musik' => [
+                'slug' => 'alat-musik',
+                'name' => 'Divisi Alat Musik',
+                'category' => 'Pengurus Harian',
+                'description' => 'Mengelola inventaris, pemeliharaan, dan optimalisasi seluruh peralatan serta fasilitas musik.',
+                'db_group' => 'Divisi Alat Musik',
+            ],
+            'vocal' => [
+                'slug' => 'vocal',
+                'name' => 'Divisi Vocal',
+                'category' => 'Pengurus Harian',
+                'description' => 'Mengembangkan bakat vokal, tata aransemen nada, dan keharmonisan paduan suara.',
+                'db_group' => 'Divisi Vocal',
+            ],
+            'kegiatan' => [
+                'slug' => 'kegiatan',
+                'name' => 'Divisi Kegiatan',
+                'category' => 'Pengurus Harian',
+                'description' => 'Merencanakan dan mengeksekusi berbagai program kerja, event, concert, serta pertunjukan.',
+                'db_group' => 'Divisi Kegiatan',
+            ],
+            'pdd' => [
+                'slug' => 'pdd',
+                'name' => 'Divisi PDD',
+                'category' => 'Pengurus Harian',
+                'description' => 'Publikasi, Dekorasi, & Dokumentasi. Mengabadikan setiap momen dan merancang ide visual.',
+                'db_group' => 'Divisi PDD',
+            ],
+            'perkap' => [
+                'slug' => 'perkap',
+                'name' => 'Divisi Perkap',
+                'category' => 'Pengurus Harian',
+                'description' => 'Menyiapkan perlengkapan teknis, logistik, dan stage setup kelancaran penampilan.',
+                'db_group' => 'Divisi Perkap',
+            ],
+            'wirausaha' => [
+                'slug' => 'wirausaha',
+                'name' => 'Divisi Wirausaha',
+                'category' => 'Pengurus Harian',
+                'description' => 'Mengelola usaha kreatif organisasi dan ketersediaan dana mandiri operasional.',
+                'db_group' => 'Divisi Wirausaha',
+            ],
+        ];
     }
 
     public function getDisplayPositionAttribute(): string
@@ -129,6 +191,7 @@ class MemberStructure extends Model
         if (str_contains($this->position, 'Anggota')) {
             return 'Anggota';
         }
+
         return $this->position;
     }
 }

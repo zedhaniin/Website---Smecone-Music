@@ -14,65 +14,70 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50/80 font-sans text-gray-800 antialiased selection:bg-brand-500 selection:text-white">
-    {{-- Navbar --}}
-    <nav class="fixed top-0 right-0 left-0 z-50 border-b border-gray-200/60 bg-white/85 backdrop-blur-xl transition-all duration-300 shadow-sm/5" id="main-navbar">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    {{-- Floating Pill Navbar (overlaps content, truly floating) --}}
+    <header class="fixed top-4 inset-x-4 z-50 max-w-5xl mx-auto pointer-events-none">
+        <nav class="pointer-events-auto rounded-full bg-white/90 backdrop-blur-xl border border-slate-200/80 shadow-xl shadow-slate-900/5 px-5 py-2.5 flex items-center justify-between transition-all duration-300" id="main-navbar">
+            {{-- Left: Brand Logo & Title --}}
             <a href="{{ route('landing') }}" class="group flex items-center gap-3 transition-transform duration-300 hover:scale-[1.02]">
-                <div class="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+                <div class="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm ring-1 ring-slate-200">
                     <img src="{{ asset('images/logo.png') }}" alt="Smecone Music Logo" class="h-full w-full rounded-full object-cover">
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xl font-extrabold tracking-tight text-gray-900 transition-colors duration-200 group-hover:text-black">Smecone Music</span>
-                    <span class="text-[10px] font-bold tracking-wider text-gray-700 uppercase -mt-1 hidden sm:block">SMKN 1 PURWOKERTO</span>
+                    <span class="text-base font-extrabold tracking-tight text-slate-900 transition-colors duration-200 group-hover:text-brand-600">Smecone Music</span>
                 </div>
             </a>
 
-            <div class="hidden items-center gap-7 md:flex">
-                <a href="{{ route('landing') }}" class="relative py-2 text-sm font-bold text-gray-900 transition-colors duration-200 hover:text-black after:absolute after:bottom-0 after:left-0 after:h-[2.5px] after:w-0 after:bg-gray-900 after:transition-all after:duration-300 hover:after:w-full {{ request()->routeIs('landing') ? 'after:w-full' : '' }}">Beranda</a>
-                <a href="{{ route('about') }}" class="relative py-2 text-sm font-bold text-gray-900 transition-colors duration-200 hover:text-black after:absolute after:bottom-0 after:left-0 after:h-[2.5px] after:w-0 after:bg-gray-900 after:transition-all after:duration-300 hover:after:w-full {{ request()->routeIs('about') ? 'after:w-full' : '' }}">Tentang</a>
-                <a href="{{ route('gallery') }}" class="relative py-2 text-sm font-bold text-gray-900 transition-colors duration-200 hover:text-black after:absolute after:bottom-0 after:left-0 after:h-[2.5px] after:w-0 after:bg-gray-900 after:transition-all after:duration-300 hover:after:w-full {{ request()->routeIs('gallery') ? 'after:w-full' : '' }}">Galeri</a>
-                <a href="{{ route('showcase') }}" class="relative py-2 text-sm font-bold text-gray-900 transition-colors duration-200 hover:text-black after:absolute after:bottom-0 after:left-0 after:h-[2.5px] after:w-0 after:bg-gray-900 after:transition-all after:duration-300 hover:after:w-full {{ request()->routeIs('showcase') ? 'after:w-full' : '' }}">Prestasi</a>
-                <a href="{{ route('struktur') }}" class="relative py-2 text-sm font-bold text-gray-900 transition-colors duration-200 hover:text-black after:absolute after:bottom-0 after:left-0 after:h-[2.5px] after:w-0 after:bg-gray-900 after:transition-all after:duration-300 hover:after:w-full {{ request()->routeIs('struktur') ? 'after:w-full' : '' }}">Struktur</a>
-                
-                <div class="h-5 w-px bg-gray-200"></div>
+            {{-- Center Navigation Links (pill hover/active) --}}
+            <div class="hidden items-center gap-1 md:flex">
+                <a href="{{ route('landing') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('landing') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Beranda</a>
+                <a href="{{ route('about') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('about') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Tentang</a>
+                <a href="{{ route('gallery') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('gallery') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Galeri</a>
+                <a href="{{ route('showcase') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('showcase') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Prestasi</a>
+                <a href="{{ route('struktur') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('struktur*') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Kepengurusan</a>
+            </div>
 
+            {{-- Right CTA Button --}}
+            <div class="hidden items-center gap-3 md:flex">
                 @auth
-                    @if(auth()->user()->hasRole('admin', 'perkap'))
-                        <a href="{{ route('admin.dashboard') }}" class="relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-600/25 transition-all duration-300 hover:-translate-y-0.5 hover:from-brand-700 hover:to-brand-800 hover:shadow-lg hover:shadow-brand-600/35 active:translate-y-0">Dashboard</a>
-                    @else
-                        <a href="{{ route('user.dashboard') }}" class="relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-600/25 transition-all duration-300 hover:-translate-y-0.5 hover:from-brand-700 hover:to-brand-800 hover:shadow-lg hover:shadow-brand-600/35 active:translate-y-0">Dashboard</a>
-                    @endif
+                    <a href="{{ auth()->user()->hasRole('admin', 'perkap') ? route('admin.dashboard') : route('user.dashboard') }}" 
+                       class="inline-flex items-center justify-center rounded-full bg-brand-950 px-5 py-2 text-xs font-extrabold text-white shadow-md shadow-brand-950/20 transition-all duration-300 hover:bg-brand-900 hover:shadow-lg hover:-translate-y-0.5">
+                        Dashboard
+                    </a>
                 @else
-                    <a href="{{ route('login') }}" class="relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-600/25 transition-all duration-300 hover:-translate-y-0.5 hover:from-brand-700 hover:to-brand-800 hover:shadow-lg hover:shadow-brand-600/35 active:translate-y-0">Login</a>
+                    <a href="{{ route('login') }}" 
+                       class="inline-flex items-center justify-center rounded-full bg-brand-950 px-5 py-2 text-xs font-extrabold text-white shadow-md shadow-brand-950/20 transition-all duration-300 hover:bg-brand-900 hover:shadow-lg hover:-translate-y-0.5">
+                        Login
+                    </a>
                 @endauth
             </div>
 
             {{-- Mobile menu button --}}
-            <button type="button" class="rounded-xl p-2 text-gray-600 transition-colors hover:bg-brand-50 hover:text-brand-700 md:hidden" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <button type="button" class="rounded-full p-2 text-slate-700 transition-colors hover:bg-slate-100 md:hidden" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
-        </div>
+        </nav>
 
-        {{-- Mobile menu --}}
-        <div class="hidden border-t border-gray-100 bg-white/95 px-4 py-4 backdrop-blur-md md:hidden" id="mobile-menu">
-            <div class="flex flex-col gap-2">
-                <a href="{{ route('about') }}" class="rounded-xl px-4 py-2.5 text-sm font-bold text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Tentang</a>
-                <a href="{{ route('gallery') }}" class="rounded-xl px-4 py-2.5 text-sm font-bold text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Galeri</a>
-                <a href="{{ route('showcase') }}" class="rounded-xl px-4 py-2.5 text-sm font-bold text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Prestasi</a>
-                <a href="{{ route('struktur') }}" class="rounded-xl px-4 py-2.5 text-sm font-bold text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Struktur</a>
-                <a href="{{ route('landing') }}#recruitment" class="rounded-xl px-4 py-2.5 text-sm font-bold text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Recruitment</a>
-                <div class="mt-2 border-t border-gray-100 pt-2">
+        {{-- Mobile dropdown menu --}}
+        <div class="pointer-events-auto mt-2 hidden rounded-3xl border border-slate-200/80 bg-white/95 p-4 backdrop-blur-xl shadow-xl md:hidden" id="mobile-menu">
+            <div class="flex flex-col gap-1">
+                <a href="{{ route('landing') }}" class="rounded-full px-4 py-2 text-xs font-bold {{ request()->routeIs('landing') ? 'bg-brand-950 text-white' : 'text-slate-700 hover:bg-slate-100' }}">Beranda</a>
+                <a href="{{ route('about') }}" class="rounded-full px-4 py-2 text-xs font-bold {{ request()->routeIs('about') ? 'bg-brand-950 text-white' : 'text-slate-700 hover:bg-slate-100' }}">Tentang</a>
+                <a href="{{ route('gallery') }}" class="rounded-full px-4 py-2 text-xs font-bold {{ request()->routeIs('gallery') ? 'bg-brand-950 text-white' : 'text-slate-700 hover:bg-slate-100' }}">Galeri</a>
+                <a href="{{ route('showcase') }}" class="rounded-full px-4 py-2 text-xs font-bold {{ request()->routeIs('showcase') ? 'bg-brand-950 text-white' : 'text-slate-700 hover:bg-slate-100' }}">Prestasi</a>
+                <a href="{{ route('struktur') }}" class="rounded-full px-4 py-2 text-xs font-bold {{ request()->routeIs('struktur*') ? 'bg-brand-950 text-white' : 'text-slate-700 hover:bg-slate-100' }}">Kepengurusan</a>
+                <div class="mt-1 border-t border-slate-100 pt-3">
                     @auth
-                        <a href="{{ auth()->user()->hasRole('admin', 'perkap') ? route('admin.dashboard') : route('user.dashboard') }}" class="block rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-bold text-white shadow-md shadow-brand-600/20">Dashboard</a>
+                        <a href="{{ auth()->user()->hasRole('admin', 'perkap') ? route('admin.dashboard') : route('user.dashboard') }}" class="block rounded-full bg-brand-950 px-4 py-2.5 text-center text-xs font-bold text-white shadow-md">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="block rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-bold text-white shadow-md shadow-brand-600/20">Login</a>
+                        <a href="{{ route('login') }}" class="block rounded-full bg-brand-950 px-4 py-2.5 text-center text-xs font-bold text-white shadow-md">Login</a>
                     @endauth
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="pt-16">
+    {{-- No padding-top on main: content goes BEHIND the floating navbar --}}
+    <main>
         @yield('content')
     </main>
 

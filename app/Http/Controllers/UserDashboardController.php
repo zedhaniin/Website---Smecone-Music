@@ -17,9 +17,40 @@ class UserDashboardController extends Controller
         /** @var User $user */
         $user = auth()->user();
 
+        // Approved studio bookings
+        $approvedBookings = StudioBooking::where('status', 'approved')
+            ->with('user')
+            ->get()
+            ->map(fn (StudioBooking $b) => [
+                'title' => '[Studio] '.$b->purpose.' ('.$b->user->name.')',
+                'start' => $b->start_time->toIso8601String(),
+                'end' => $b->end_time->toIso8601String(),
+                'color' => '#6C5CE7',
+            ]);
+
+        // Approved instrument borrowings
+        $approvedBorrowings = Borrowing::where('status', 'approved')
+            ->with(['user', 'instrument'])
+            ->get()
+            ->map(fn (Borrowing $b) => [
+                'title' => '[Alat] '.$b->instrument->name.' ('.$b->user->name.')',
+                'start' => $b->start_date->format('Y-m-d'),
+                'end' => $b->end_date->copy()->addDay()->format('Y-m-d'),
+                'color' => '#10B981',
+            ]);
+
+        $events = $approvedBookings->concat($approvedBorrowings)->values();
+
         return view('user.dashboard', [
             'borrowings' => $user->borrowings()->with('instrument')->latest()->get(),
             'bookings' => $user->studioBookings()->latest()->get(),
+            'events' => $events,
+        ]);
+    }
+
+    public function createBorrowing(): View
+    {
+        return view('user.borrowings.create', [
             'instruments' => Instrument::where('is_available', true)->get(),
         ]);
     }
@@ -50,7 +81,12 @@ class UserDashboardController extends Controller
             'status' => 'pending',
         ]);
 
-        return back()->with('success', 'Permintaan peminjaman berhasil dikirim. Menunggu persetujuan Admin/Perkap.');
+        return redirect()->route('user.dashboard')->with('success', 'Permintaan peminjaman berhasil dikirim. Menunggu persetujuan Admin/Perkap.');
+    }
+
+    public function createBooking(): View
+    {
+        return view('user.bookings.create');
     }
 
     public function storeBooking(Request $request): RedirectResponse
@@ -71,22 +107,11 @@ class UserDashboardController extends Controller
 
         $booking->save();
 
-        return back()->with('success', 'Permintaan booking studio berhasil dikirim. Menunggu persetujuan Admin/Perkap.');
+        return redirect()->route('user.dashboard')->with('success', 'Permintaan booking studio berhasil dikirim. Menunggu persetujuan Admin/Perkap.');
     }
 
     public function bookingCalendar(): View
     {
-        $bookings = StudioBooking::where('status', 'approved')
-            ->with('user')
-            ->get()
-            ->map(fn (StudioBooking $b) => [
-                'title' => $b->purpose.' - '.$b->user->name,
-                'start' => $b->start_time->toIso8601String(),
-                'end' => $b->end_time->toIso8601String(),
-            ]);
-
-        return view('user.calendar', [
-            'events' => $bookings,
-        ]);
+        return $this->index();
     }
 }
