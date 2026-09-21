@@ -73,4 +73,17 @@ html {
     display: none !important;
 }
 
+/* Button & Nav link animation utilities */
+.nav-link-animate {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-animate:hover {
+    transform: translateY(-1px);
+}
+
+.nav-link-animate:active {
+    transform: translateY(1px) scale(0.97);
+}
+
 

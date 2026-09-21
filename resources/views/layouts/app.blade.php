@@ -27,25 +27,45 @@
                 </div>
             </a>
 
-            {{-- Center Navigation Links (pill hover/active) --}}
-            <div class="hidden items-center gap-1 md:flex">
-                <a href="{{ route('landing') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('landing') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Beranda</a>
-                <a href="{{ route('about') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('about') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Tentang</a>
-                <a href="{{ route('gallery') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('gallery') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Galeri</a>
-                <a href="{{ route('showcase') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('showcase') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Prestasi</a>
-                <a href="{{ route('struktur') }}" class="rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200 {{ request()->routeIs('struktur*') ? 'bg-brand-950 text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">Kepengurusan</a>
+            {{-- Center Navigation Links with Smooth Animated Sliding Pill Indicator --}}
+            <div class="relative hidden items-center gap-1 md:flex p-1 bg-slate-100/70 rounded-full border border-slate-200/60" id="nav-container">
+                {{-- Animated Sliding Pill Background --}}
+                <div id="nav-sliding-pill" 
+                     class="absolute rounded-full bg-brand-950 shadow-md shadow-brand-950/20 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-0"
+                     style="top: 4px; bottom: 4px; left: 0; width: 0; opacity: 0;"></div>
+
+                <a href="{{ route('landing') }}" 
+                   class="nav-item relative z-10 rounded-full px-4 py-1.5 text-xs font-bold transition-colors duration-200 {{ request()->routeIs('landing') ? 'text-white is-active' : 'text-slate-600' }}">
+                   Beranda
+                </a>
+                <a href="{{ route('about') }}" 
+                   class="nav-item relative z-10 rounded-full px-4 py-1.5 text-xs font-bold transition-colors duration-200 {{ request()->routeIs('about') ? 'text-white is-active' : 'text-slate-600' }}">
+                   Tentang
+                </a>
+                <a href="{{ route('gallery') }}" 
+                   class="nav-item relative z-10 rounded-full px-4 py-1.5 text-xs font-bold transition-colors duration-200 {{ request()->routeIs('gallery') ? 'text-white is-active' : 'text-slate-600' }}">
+                   Galeri
+                </a>
+                <a href="{{ route('showcase') }}" 
+                   class="nav-item relative z-10 rounded-full px-4 py-1.5 text-xs font-bold transition-colors duration-200 {{ request()->routeIs('showcase') ? 'text-white is-active' : 'text-slate-600' }}">
+                   Prestasi
+                </a>
+                <a href="{{ route('struktur') }}" 
+                   class="nav-item relative z-10 rounded-full px-4 py-1.5 text-xs font-bold transition-colors duration-200 {{ request()->routeIs('struktur*') ? 'text-white is-active' : 'text-slate-600' }}">
+                   Kepengurusan
+                </a>
             </div>
 
             {{-- Right CTA Button --}}
             <div class="hidden items-center gap-3 md:flex">
                 @auth
                     <a href="{{ auth()->user()->hasRole('admin', 'perkap') ? route('admin.dashboard') : route('user.dashboard') }}" 
-                       class="inline-flex items-center justify-center rounded-full bg-brand-950 px-5 py-2 text-xs font-extrabold text-white shadow-md shadow-brand-950/20 transition-all duration-300 hover:bg-brand-900 hover:shadow-lg hover:-translate-y-0.5">
+                       class="inline-flex items-center justify-center rounded-full bg-brand-950 px-5 py-2 text-xs font-extrabold text-white shadow-md shadow-brand-950/20 transition-all duration-300 hover:bg-brand-900 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
                         Dashboard
                     </a>
                 @else
                     <a href="{{ route('login') }}" 
-                       class="inline-flex items-center justify-center rounded-full bg-brand-950 px-5 py-2 text-xs font-extrabold text-white shadow-md shadow-brand-950/20 transition-all duration-300 hover:bg-brand-900 hover:shadow-lg hover:-translate-y-0.5">
+                       class="inline-flex items-center justify-center rounded-full bg-brand-950 px-5 py-2 text-xs font-extrabold text-white shadow-md shadow-brand-950/20 transition-all duration-300 hover:bg-brand-900 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
                         Login
                     </a>
                 @endauth
@@ -122,6 +142,66 @@
     </footer>
 
     @stack('scripts')
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('nav-container');
+            const pill = document.getElementById('nav-sliding-pill');
+            if (!container || !pill) return;
+
+            const items = container.querySelectorAll('.nav-item');
+            let activeItem = container.querySelector('.is-active') || items[0];
+
+            function setPillPosition(targetEl, animate = true) {
+                if (!targetEl) return;
+                const containerRect = container.getBoundingClientRect();
+                const targetRect = targetEl.getBoundingClientRect();
+
+                const left = targetRect.left - containerRect.left;
+                const width = targetRect.width;
+
+                if (!animate) {
+                    pill.style.transition = 'none';
+                } else {
+                    pill.style.transition = 'all 350ms cubic-bezier(0.16, 1, 0.3, 1)';
+                }
+
+                pill.style.left = `${left}px`;
+                pill.style.width = `${width}px`;
+                pill.style.opacity = '1';
+
+                if (!animate) {
+                    // Force browser reflow to apply position instantly without transition
+                    void pill.offsetHeight;
+                    pill.style.transition = 'all 350ms cubic-bezier(0.16, 1, 0.3, 1)';
+                }
+
+                // Update text colors
+                items.forEach(item => {
+                    if (item === targetEl) {
+                        item.classList.remove('text-slate-600', 'text-slate-700');
+                        item.classList.add('text-white');
+                    } else {
+                        item.classList.remove('text-white');
+                        item.classList.add('text-slate-600');
+                    }
+                });
+            }
+
+            // 1. Instantly place pill on the active page link on load (no transition from Beranda / 0)
+            setPillPosition(activeItem, false);
+
+            // 2. Smoothly slide pill when hovering over links (from current position to hovered link)
+            items.forEach(item => {
+                item.addEventListener('mouseenter', () => setPillPosition(item, true));
+            });
+
+            // 3. Smoothly slide pill back to active link on mouseleave
+            container.addEventListener('mouseleave', () => {
+                setPillPosition(activeItem, true);
+            });
+
+            window.addEventListener('resize', () => setPillPosition(activeItem, false));
+        });
+    </script>
 </html>
 
