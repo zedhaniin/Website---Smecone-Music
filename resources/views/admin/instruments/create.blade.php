@@ -30,7 +30,10 @@
                 </div>
 
                 <div>
-                    <label for="image" class="mb-1.5 block text-sm font-medium text-gray-700">Foto Alat</label>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label for="image" class="block text-sm font-medium text-gray-700">Foto Alat</label>
+                        <span class="text-xs text-gray-400">Maks. 5MB (JPG, PNG, WEBP)</span>
+                    </div>
                     <input type="file" name="image" id="image" accept="image/*"
                            class="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-1.5 file:text-sm file:font-semibold file:text-brand-700 hover:file:bg-brand-100">
                     @error('image')

@@ -29,7 +29,10 @@
                 </div>
 
                 <div>
-                    <label for="image" class="mb-1.5 block text-sm font-medium text-gray-700">Foto Alat</label>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label for="image" class="block text-sm font-medium text-gray-700">Foto Alat</label>
+                        <span class="text-xs text-gray-400">Maks. 5MB (JPG, PNG, WEBP)</span>
+                    </div>
                     @if($instrument->image_path)
                         <div class="mb-3">
                             <img src="{{ asset('storage/' . $instrument->image_path) }}" alt="{{ $instrument->name }}" class="h-32 w-32 rounded-xl object-cover">

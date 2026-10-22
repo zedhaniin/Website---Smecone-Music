@@ -11,35 +11,27 @@
         </div>
         
         {{-- Gradient Overlay (Left to Right) --}}
-        <div class="absolute inset-0 z-10 bg-gradient-to-r from-brand-950/95 via-brand-950/80 to-transparent sm:w-3/4 md:w-2/3 lg:w-1/2">
-            <div class="h-full w-full backdrop-blur-[2px]"></div>
-        </div>
+        <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:w-3/4 md:w-2/3 lg:w-1/2"></div>
 
         {{-- Content --}}
         <div class="relative z-20 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex max-w-2xl flex-col items-start text-left">
-                <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-400/40 bg-brand-900/60 px-4 py-2 text-xs sm:text-sm font-bold tracking-wide text-brand-200 backdrop-blur-md shadow-lg shadow-brand-950/50">
-                    <svg class="h-4 w-4 text-brand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0013 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/></svg>
-                    <span>Ekstrakurikuler Musik SMKN 1 Purwokerto</span>
-                </div>
-                
-                <h1 class="text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-7xl">
-                    <span class="text-brand-200 drop-shadow-sm">When the world fall,</span><br>
-                    <span class="mt-2 block bg-gradient-to-r from-white via-brand-100 to-brand-300 bg-clip-text text-transparent">music speaks.</span>
+                <h1 class="text-3xl min-[400px]:text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-white">
+                    When the world fall,<br>
+                    music speaks.
                 </h1>
                 
-                <p class="mt-6 text-base sm:text-lg leading-relaxed text-brand-100/90 font-medium">
-                    Smecone Music adalah wadah bagi siswa-siswi SMKN 1 Purwokerto yang memiliki passion di bidang musik.
-                    Dari latihan rutin hingga kompetisi nasional — kami berkarya bersama.
+                <p class="mt-5 text-sm sm:text-lg leading-relaxed text-white/90 font-medium">
+                    Smecone Music adalah wadah bagi siswa-siswi SMKN 1 Purwokerto yang memiliki passion di bidang musik. Dari latihan rutin hingga kompetisi nasional — kami berkarya bersama.
                 </p>
                 
-                <div class="mt-10 flex flex-wrap items-center gap-4">
-                    <a href="{{ route('about') }}" class="group relative rounded-xl bg-white px-8 py-3.5 text-sm font-extrabold text-brand-950 shadow-xl shadow-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-2xl hover:shadow-brand-400/30 active:translate-y-0 active:scale-100">
+                <div class="mt-8 sm:mt-10 flex flex-wrap items-center gap-3.5 sm:gap-4">
+                    <a href="{{ route('about') }}" class="tap-press rounded-xl bg-white px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-extrabold text-slate-950 shadow-lg transition-all duration-300 hover:bg-slate-100 hover:-translate-y-0.5">
                         Kenali Lebih Jauh
                     </a>
-                    <a href="#recruitment" class="group flex items-center gap-2.5 rounded-xl border-2 border-white/30 bg-white/10 px-8 py-3.5 text-sm font-extrabold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.03] hover:border-white/60 hover:bg-white/20 hover:shadow-lg hover:shadow-white/10 active:translate-y-0 active:scale-100">
+                    <a href="#recruitment" class="tap-press flex items-center gap-2 rounded-xl border border-white/20 bg-[#251340]/80 backdrop-blur-md px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-extrabold text-white shadow-lg transition-all duration-300 hover:bg-[#2c174e] hover:border-white/40 hover:-translate-y-0.5">
                         <span>Gabung Sekarang</span>
-                        <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 </div>
             </div>
@@ -50,34 +42,96 @@
     <section class="py-20 sm:py-24 bg-white" id="about">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
-                <span class="inline-block rounded-full bg-brand-100/80 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand-700 ring-1 ring-brand-300/40">Tentang Kami</span>
-                <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Tentang Smecone Music</h2>
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Tentang Smecone Music</h2>
                 <p class="mt-5 text-base sm:text-lg leading-relaxed text-gray-600 font-medium">
                     Smecone Music merupakan ekstrakurikuler musik di SMKN 1 Purwokerto yang berdedikasi untuk mengembangkan bakat dan minat siswa di bidang seni musik.
                 </p>
             </div>
 
-            <div class="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-3">
-                <div class="group rounded-3xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10">
-                    <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-200/50 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+            {{-- Interactive Expanding Accordion Cards (Same as Tentang / About page) --}}
+            <div class="mt-14 flex flex-col lg:flex-row h-auto lg:h-[340px] gap-4 w-full">
+                <!-- Card 1 -->
+                <div class="group relative flex flex-col lg:flex-row lg:flex-1 w-full overflow-hidden rounded-[2rem] bg-brand-50 border border-brand-100/50 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] hover:lg:flex-[2.5] cursor-default">
+                    <!-- Left Info -->
+                    <div class="flex w-full lg:w-[260px] shrink-0 flex-col justify-between p-8 z-10">
+                        <div>
+                            <h3 class="text-2xl font-black text-brand-950 leading-tight">Latihan<br>Rutin</h3>
+                        </div>
+                        <div class="mt-8 flex items-center gap-2">
+                            <span class="text-sm font-bold text-brand-800">Baca Detail</span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-200/50 text-brand-800 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                                <svg class="h-4 w-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-extrabold tracking-tight text-gray-900 group-hover:text-brand-700 transition-colors">Latihan Rutin</h3>
-                    <p class="mt-3 text-sm leading-relaxed text-gray-600 font-medium">Jadwal latihan terstruktur dengan pembimbing berpengalaman di Studio Musik (STM).</p>
+                    
+                    <!-- Right Content -->
+                    <div class="relative flex flex-1 items-center overflow-hidden">
+                        <div class="flex w-full items-center gap-6 p-8 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-x-8 lg:group-hover:translate-x-0 transition-all duration-700 delay-100 min-w-[300px]">
+                            <div class="flex-1">
+                                <p class="text-brand-900 font-semibold leading-relaxed">Jadwal latihan terstruktur dengan pembimbing berpengalaman di Studio Musik (STM).</p>
+                            </div>
+                            <div class="hidden md:flex h-24 w-24 shrink-0 rounded-2xl bg-brand-100/80 items-center justify-center text-brand-600 shadow-sm border border-brand-200/50">
+                                <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="group rounded-3xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10">
-                    <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-200/50 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+
+                <!-- Card 2 -->
+                <div class="group relative flex flex-col lg:flex-row lg:flex-1 w-full overflow-hidden rounded-[2rem] bg-brand-50 border border-brand-100/50 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] hover:lg:flex-[2.5] cursor-default">
+                    <!-- Left Info -->
+                    <div class="flex w-full lg:w-[260px] shrink-0 flex-col justify-between p-8 z-10">
+                        <div>
+                            <h3 class="text-2xl font-black text-brand-950 leading-tight">Kompetisi<br>FLS3N</h3>
+                        </div>
+                        <div class="mt-8 flex items-center gap-2">
+                            <span class="text-sm font-bold text-brand-800">Baca Detail</span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-200/50 text-brand-800 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                                <svg class="h-4 w-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-extrabold tracking-tight text-gray-900 group-hover:text-brand-700 transition-colors">Kompetisi FLS3N</h3>
-                    <p class="mt-3 text-sm leading-relaxed text-gray-600 font-medium">Aktif mengikuti FLS3N dan berbagai kompetisi musik tingkat regional hingga nasional.</p>
+                    
+                    <!-- Right Content -->
+                    <div class="relative flex flex-1 items-center overflow-hidden">
+                        <div class="flex w-full items-center gap-6 p-8 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-x-8 lg:group-hover:translate-x-0 transition-all duration-700 delay-100 min-w-[300px]">
+                            <div class="flex-1">
+                                <p class="text-brand-900 font-semibold leading-relaxed">Aktif mengikuti FLS3N dan berbagai kompetisi musik tingkat regional hingga nasional.</p>
+                            </div>
+                            <div class="hidden md:flex h-24 w-24 shrink-0 rounded-2xl bg-brand-100/80 items-center justify-center text-brand-600 shadow-sm border border-brand-200/50">
+                                <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="group rounded-3xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10">
-                    <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-200/50 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+
+                <!-- Card 3 -->
+                <div class="group relative flex flex-col lg:flex-row lg:flex-1 w-full overflow-hidden rounded-[2rem] bg-brand-50 border border-brand-100/50 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] hover:lg:flex-[2.5] cursor-default">
+                    <!-- Left Info -->
+                    <div class="flex w-full lg:w-[260px] shrink-0 flex-col justify-between p-8 z-10">
+                        <div>
+                            <h3 class="text-2xl font-black text-brand-950 leading-tight">Komunitas<br>Solid</h3>
+                        </div>
+                        <div class="mt-8 flex items-center gap-2">
+                            <span class="text-sm font-bold text-brand-800">Baca Detail</span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-200/50 text-brand-800 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                                <svg class="h-4 w-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-extrabold tracking-tight text-gray-900 group-hover:text-brand-700 transition-colors">Komunitas Solid</h3>
-                    <p class="mt-3 text-sm leading-relaxed text-gray-600 font-medium">Bergabung dengan puluhan siswa yang berbagi passion yang sama terhadap musik.</p>
+                    
+                    <!-- Right Content -->
+                    <div class="relative flex flex-1 items-center overflow-hidden">
+                        <div class="flex w-full items-center gap-6 p-8 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-x-8 lg:group-hover:translate-x-0 transition-all duration-700 delay-100 min-w-[300px]">
+                            <div class="flex-1">
+                                <p class="text-brand-900 font-semibold leading-relaxed">Bergabung dengan puluhan siswa yang berbagi passion yang sama terhadap musik.</p>
+                            </div>
+                            <div class="hidden md:flex h-24 w-24 shrink-0 rounded-2xl bg-brand-100/80 items-center justify-center text-brand-600 shadow-sm border border-brand-200/50">
+                                <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -96,8 +150,7 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                 <div>
-                    <span class="inline-block rounded-full bg-brand-100/80 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand-700 ring-1 ring-brand-300/40">Dokumentasi</span>
-                    <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Galeri Kegiatan</h2>
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Galeri Kegiatan</h2>
                     <p class="mt-2 text-gray-600 font-medium">Momen berharga dan aktivitas seru anggota Smecone Music.</p>
                 </div>
 
@@ -112,15 +165,18 @@
                 <div class="flex w-max animate-marquee gap-6 hover:[animation-play-state:paused]">
                     @for($i = 0; $i < 4; $i++)
                         @foreach($galleries as $gallery)
-                            <div class="group relative w-[280px] sm:w-[320px] md:w-[360px] shrink-0 overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/20">
+                            <a href="{{ route('gallery.detail', $gallery->slug) }}" class="group relative w-[280px] sm:w-[320px] md:w-[360px] shrink-0 overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/20 block">
                                 <div class="aspect-[4/3] w-full overflow-hidden">
                                     <img src="{{ asset('storage/' . $gallery->image_path) }}" alt="{{ $gallery->title }}" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
                                 </div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                                 <div class="absolute bottom-0 left-0 right-0 translate-y-4 p-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                                     <p class="text-lg font-extrabold text-white tracking-tight">{{ $gallery->title }}</p>
+                                    @if($gallery->description)
+                                        <p class="text-xs text-brand-200 mt-1 line-clamp-1 font-medium">{{ $gallery->description }}</p>
+                                    @endif
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     @endfor
                 </div>
@@ -135,8 +191,7 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                 <div>
-                    <span class="inline-block rounded-full bg-brand-100/80 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand-700 ring-1 ring-brand-300/40">Prestasi & Karya</span>
-                    <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Portofolio & Prestasi</h2>
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Portofolio & Prestasi</h2>
                     <p class="mt-2 text-gray-600 font-medium">Koleksi penampilan terbaik FLS3N Smecone Music di YouTube dan Instagram.</p>
                 </div>
 
@@ -206,8 +261,7 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                 <div>
-                    <span class="inline-block rounded-full bg-brand-100/80 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand-700 ring-1 ring-brand-300/40">Organisasi</span>
-                    <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Struktur Kepengurusan</h2>
+                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Struktur Kepengurusan</h2>
                     <p class="mt-2 text-gray-600 font-medium">Pengurus Smecone Music yang menjalankan roda organisasi.</p>
                 </div>
 
@@ -260,16 +314,15 @@
         </div>
         <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
-                <span class="inline-block rounded-full border border-brand-400/40 bg-brand-900/60 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand-200 shadow-md">Open Recruitment</span>
-                <h2 class="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-5xl">Bergabung dengan Kami!</h2>
+                <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">Bergabung dengan Kami!</h2>
                 <p class="mx-auto mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-brand-200/90 font-medium">
                     Tertarik untuk menjadi bagian dari Smecone Music? Daftarkan dirimu sekarang dan mulai perjalanan musikmu bersama kami.
                 </p>
-                <div class="mt-10">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6EX9_EjRQIhdPoRQ57NJLBPKjvXj3He-Oz_ADtZwaxJ2b8Q/viewform" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center gap-3 rounded-2xl bg-white px-10 py-5 text-base font-extrabold text-brand-950 shadow-2xl shadow-white/15 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.04] hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.3)] active:translate-y-0 active:scale-100">
-                        <svg class="h-5 w-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <div class="mt-8 sm:mt-10">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6EX9_EjRQIhdPoRQ57NJLBPKjvXj3He-Oz_ADtZwaxJ2b8Q/viewform" target="_blank" rel="noopener noreferrer" class="tap-press group relative inline-flex items-center gap-2.5 sm:gap-3 rounded-2xl bg-white px-6 sm:px-10 py-4 sm:py-5 text-sm sm:text-base font-extrabold text-brand-950 shadow-2xl shadow-white/15 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.04] hover:shadow-[0_20px_50px_-10px_rgba(255,255,255,0.3)]">
+                        <svg class="h-5 w-5 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                         <span>Isi Formulir Pendaftaran</span>
-                        <svg class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        <svg class="h-5 w-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 </div>
                 <p class="mt-6 text-sm font-medium text-brand-300/70">

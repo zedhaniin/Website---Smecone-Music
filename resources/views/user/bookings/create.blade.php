@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('user.booking.store') }}" class="flex flex-col gap-5">
+        <form method="POST" action="{{ route('user.booking.store') }}" enctype="multipart/form-data" class="flex flex-col gap-5">
             @csrf
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -44,9 +44,19 @@
 
             <div>
                 <label for="purpose" class="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">Keperluan & Agenda Latihan</label>
-                <textarea name="purpose" id="purpose" rows="4" required placeholder="Contoh: Latihan band rutin persiapan event festival musik sekolah Smecone"
+                <textarea name="purpose" id="purpose" rows="3" required placeholder="Contoh: Latihan band rutin persiapan event festival musik sekolah Smecone"
                           class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-800 focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-all">{{ old('purpose') }}</textarea>
                 @error('purpose') <p class="mt-1.5 text-xs font-medium text-rose-600">{{ $message }}</p> @enderror
+            </div>
+
+            <div>
+                <label for="permission_letter" class="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
+                    Upload Berkas Surat Izin (PDF/Gambar, max 5MB) <span class="text-rose-500">*</span>
+                </label>
+                <input type="file" name="permission_letter" id="permission_letter" accept=".pdf,.jpg,.jpeg,.png" required
+                       class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs text-slate-600 file:mr-3 file:rounded-xl file:border-0 file:bg-brand-950 file:px-3.5 file:py-1.5 file:text-xs file:font-bold file:text-brand-300">
+                <p class="mt-1 text-[11px] text-slate-400">Lampirkan surat izin peminjaman/penggunaan studio musik (STM).</p>
+                @error('permission_letter') <p class="mt-1.5 text-xs font-medium text-rose-600">{{ $message }}</p> @enderror
             </div>
 
             <div class="mt-4 flex items-center gap-3 pt-2">

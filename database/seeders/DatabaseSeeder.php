@@ -13,24 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Admin
+        $this->call(RoleAndPermissionSeeder::class);
+
+        // Ketua / Super Admin
         User::updateOrCreate(
             ['email' => 'admin@smecone.music'],
             [
-                'name' => 'Admin Music',
+                'name' => 'Ketua Smecone Music',
                 'password' => Hash::make('password'),
-                'role' => 'admin',
-                'is_approved' => true,
-            ]
-        );
-
-        // Perkap
-        User::updateOrCreate(
-            ['email' => 'perkap@smecone.music'],
-            [
-                'name' => 'Perkap Music',
-                'password' => Hash::make('password'),
-                'role' => 'perkap',
+                'role' => 'ketua',
                 'is_approved' => true,
             ]
         );

@@ -8,10 +8,12 @@
             <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">Inventaris Alat Musik</h1>
             <p class="text-xs text-slate-500 mt-0.5">Kelola koleksi alat musik Smecone Music dan status ketersediaannya.</p>
         </div>
+        @can('create_instruments')
         <a href="{{ route('admin.instruments.create') }}" class="inline-flex items-center gap-2 rounded-2xl bg-brand-600 px-5 py-3 text-xs font-extrabold text-white shadow-lg shadow-brand-600/30 transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-700 w-fit">
             <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Tambah Alat Musik</span>
         </a>
+        @endcan
     </div>
 
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -45,10 +47,14 @@
                     </div>
                 </div>
 
+                @if(auth()->user()->can('edit_instruments') || auth()->user()->can('delete_instruments'))
                 <div class="px-6 pb-6 pt-0 flex items-center gap-2">
+                    @can('edit_instruments')
                     <a href="{{ route('admin.instruments.edit', $instrument) }}" class="flex-1 rounded-xl bg-slate-100 px-3 py-2 text-center text-xs font-extrabold text-slate-800 transition-colors hover:bg-slate-200">
                         Edit
                     </a>
+                    @endcan
+                    @can('delete_instruments')
                     <form method="POST" action="{{ route('admin.instruments.destroy', $instrument) }}" onsubmit="return confirm('Yakin ingin menghapus alat ini?')" class="flex-1">
                         @csrf
                         @method('DELETE')
@@ -56,7 +62,16 @@
                             Hapus
                         </button>
                     </form>
+                    @endcan
                 </div>
+                @else
+                <div class="px-6 pb-6 pt-0">
+                    <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-100 w-full justify-center">
+                        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        Mode View-Only
+                    </span>
+                </div>
+                @endif
             </div>
         @empty
             <div class="col-span-full rounded-3xl border border-slate-200/60 bg-white py-16 text-center shadow-sm">

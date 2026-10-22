@@ -46,4 +46,63 @@ class MemberStructureTest extends TestCase
         $responseInvalid = $this->get('/struktur/divisi-tidak-ada');
         $responseInvalid->assertStatus(404);
     }
+
+    public function test_admin_can_update_division_cover_photo(): void
+    {
+        \Illuminate\Support\Facades\Storage::fake('public');
+
+        $admin = \App\Models\User::factory()->create([
+            'role' => 'admin',
+            'is_approved' => true,
+        ]);
+
+        $division = \App\Models\Division::where('slug', 'humas')->first();
+
+        $file = \Illuminate\Http\UploadedFile::fake()->image('cover-humas.jpg', 800, 600);
+
+        $response = $this->actingAs($admin)->put(route('admin.divisions.update', $division), [
+            'name' => 'Divisi Humas & Eksternal',
+            'description' => 'Deskripsi baru divisi humas',
+            'image' => $file,
+        ]);
+
+        $response->assertSessionHas('success');
+        $division->refresh();
+
+        $this->assertEquals('Divisi Humas & Eksternal', $division->name);
+        $this->assertEquals('Deskripsi baru divisi humas', $division->description);
+        $this->assertNotNull($division->cover_image_path);
+        \Illuminate\Support\Facades\Storage::disk('public')->assertExists($division->cover_image_path);
+
+        // Verify public page displays updated cover
+        $responsePublic = $this->get('/struktur');
+        $responsePublic->assertStatus(200);
+        $responsePublic->assertSee(asset('storage/' . $division->cover_image_path), false);
+    }
+
+    public function test_admin_can_add_member_to_specific_division(): void
+    {
+        $admin = \App\Models\User::factory()->create([
+            'role' => 'admin',
+            'is_approved' => true,
+        ]);
+
+        $division = \App\Models\Division::where('slug', 'vocal')->first();
+
+        $response = $this->actingAs($admin)->post(route('admin.divisions.members.store', $division), [
+            'name' => 'Vocalist Bintang',
+            'position' => 'Koordinator Vocal',
+        ]);
+
+        $response->assertSessionHas('success');
+
+        $member = MemberStructure::where('name', 'Vocalist Bintang')->first();
+        $this->assertNotNull($member);
+        $this->assertEquals($division->id, $member->division_id);
+
+        // Check division detail page
+        $responseDetail = $this->get('/struktur/vocal');
+        $responseDetail->assertStatus(200);
+        $responseDetail->assertSee('Vocalist Bintang');
+    }
 }

@@ -43,9 +43,14 @@
             @enderror
         </div>
 
-        <div class="flex items-center gap-2.5">
-            <input type="checkbox" name="remember" id="remember" class="h-4 w-4 rounded-md border-gray-300 text-brand-600 focus:ring-brand-500">
-            <label for="remember" class="text-sm font-medium text-gray-600 select-none">Ingat saya</label>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <input type="checkbox" name="remember" id="remember" class="h-4 w-4 rounded-md border-gray-300 text-brand-600 focus:ring-brand-500">
+                <label for="remember" class="text-sm font-medium text-gray-600 select-none">Ingat saya</label>
+            </div>
+            <a href="{{ route('password.request') }}" class="text-xs font-bold text-brand-600 transition-colors hover:text-brand-700 hover:underline">
+                Lupa Password?
+            </a>
         </div>
 
         <button type="submit" class="mt-2 w-full rounded-2xl bg-brand-600 px-6 py-4 text-sm font-extrabold text-white shadow-lg shadow-brand-600/30 transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-xl hover:shadow-brand-600/40 active:translate-y-0">

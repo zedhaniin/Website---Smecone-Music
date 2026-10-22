@@ -86,4 +86,53 @@ html {
     transform: translateY(1px) scale(0.97);
 }
 
+/* Touch & Mobile UX Optimization */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button, a, input, select, textarea {
+    touch-action: manipulation;
+}
+
+.tap-press {
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
+}
+
+.tap-press:active {
+    transform: scale(0.96);
+}
+
+/* Keyframe animations for dynamic dropdowns and modals */
+@keyframes slideDownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-down {
+    animation: slideDownFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+    animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
 

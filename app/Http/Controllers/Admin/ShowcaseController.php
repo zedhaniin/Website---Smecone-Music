@@ -19,6 +19,8 @@ class ShowcaseController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        abort_unless(auth()->user()->can('create_showcases'), 403, 'Anda tidak memiliki hak akses untuk menambah showcase prestasi.');
+
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
@@ -33,6 +35,8 @@ class ShowcaseController extends Controller
 
     public function destroy(Showcase $showcase): RedirectResponse
     {
+        abort_unless(auth()->user()->can('delete_showcases'), 403, 'Anda tidak memiliki hak akses untuk menghapus showcase.');
+
         $showcase->delete();
 
         return back()->with('success', 'Showcase berhasil dihapus.');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Division;
 use App\Models\Gallery;
 use App\Models\MemberStructure;
 use App\Models\Showcase;
@@ -26,7 +27,23 @@ class LandingController extends Controller
     public function gallery(): View
     {
         return view('gallery', [
-            'galleries' => Gallery::latest()->paginate(12),
+            'galleries' => Gallery::withCount('photos')->latest()->paginate(9),
+        ]);
+    }
+
+    public function galleryDetail(Gallery $gallery): View
+    {
+        $gallery->load('photos');
+
+        $otherGalleries = Gallery::where('id', '!=', $gallery->id)
+            ->withCount('photos')
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('gallery-detail', [
+            'gallery' => $gallery,
+            'otherGalleries' => $otherGalleries,
         ]);
     }
 
@@ -39,18 +56,31 @@ class LandingController extends Controller
 
     public function struktur(): View
     {
-        $allMembers = MemberStructure::orderBy('order')->orderBy('id')->get();
-        $divisionDefs = MemberStructure::getDivisionDefinitions();
+        $divisions = Division::with('members')->orderBy('order')->orderBy('id')->get();
 
-        $divisions = [];
-        foreach ($divisionDefs as $slug => $def) {
-            $members = $allMembers->filter(function ($member) use ($def) {
-                return $member->division_group === $def['db_group'];
-            });
+        foreach ($divisions as $division) {
+            if ($division->members->isEmpty()) {
+                $matchPattern = match ($division->slug) {
+                    'pengurus-inti' => ['Ketua', 'Wakil', 'Sekretaris 1', 'Sekretaris 2', 'Bendahara 1', 'Bendahara 2'],
+                    'humas' => '%Humas%',
+                    'alat-musik' => '%Alat Musik%',
+                    'vocal' => '%Vocal%',
+                    'kegiatan' => '%Kegiatan%',
+                    'pdd' => '%PDD%',
+                    'perkap' => '%Perkap%',
+                    'wirausaha' => '%Wirausaha%',
+                    default => null,
+                };
 
-            $divisions[] = array_merge($def, [
-                'members' => $members->values(),
-            ]);
+                $fallbackMembers = MemberStructure::where('division_id', $division->id);
+                if (is_array($matchPattern)) {
+                    $fallbackMembers->orWhereIn('position', $matchPattern);
+                } elseif (is_string($matchPattern)) {
+                    $fallbackMembers->orWhere('position', 'like', $matchPattern);
+                }
+
+                $division->setRelation('members', $fallbackMembers->orderBy('order')->orderBy('id')->get());
+            }
         }
 
         return view('struktur', compact('divisions'));
@@ -58,17 +88,28 @@ class LandingController extends Controller
 
     public function strukturDetail(string $slug): View
     {
-        $divisionDefs = MemberStructure::getDivisionDefinitions();
+        $division = Division::where('slug', $slug)->firstOrFail();
+        
+        $matchPattern = match ($division->slug) {
+            'pengurus-inti' => ['Ketua', 'Wakil', 'Sekretaris 1', 'Sekretaris 2', 'Bendahara 1', 'Bendahara 2'],
+            'humas' => '%Humas%',
+            'alat-musik' => '%Alat Musik%',
+            'vocal' => '%Vocal%',
+            'kegiatan' => '%Kegiatan%',
+            'pdd' => '%PDD%',
+            'perkap' => '%Perkap%',
+            'wirausaha' => '%Wirausaha%',
+            default => null,
+        };
 
-        if (! isset($divisionDefs[$slug])) {
-            abort(404);
+        $membersQuery = MemberStructure::where('division_id', $division->id);
+        if (is_array($matchPattern)) {
+            $membersQuery->orWhereIn('position', $matchPattern);
+        } elseif (is_string($matchPattern)) {
+            $membersQuery->orWhere('position', 'like', $matchPattern);
         }
 
-        $division = $divisionDefs[$slug];
-        $allMembers = MemberStructure::orderBy('order')->orderBy('id')->get();
-        $members = $allMembers->filter(function ($member) use ($division) {
-            return $member->division_group === $division['db_group'];
-        })->values();
+        $members = $membersQuery->orderBy('order')->orderBy('id')->get();
 
         return view('struktur-detail', compact('division', 'members'));
     }

@@ -3,12 +3,15 @@
 @section('title', 'Tentang Kami - Smecone Music')
 
 @section('content')
-    <div class="bg-gradient-to-b from-gray-900 to-brand-950 pt-28 pb-20 text-white sm:pt-36 sm:pb-28">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {{-- Hero Header Banner --}}
+    <div class="relative overflow-hidden bg-gradient-to-b from-brand-950 via-brand-900 to-slate-950 pt-28 pb-16 text-white sm:pt-36 sm:pb-20">
+        <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-brand-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none"></div>
+
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
-                <span class="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand-200 backdrop-blur-md">Profil Organization</span>
-                <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Tentang Smecone Music</h1>
-                <p class="mt-4 text-lg text-brand-200/90 font-medium">"When the world fall, music speaks."</p>
+                <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Tentang Smecone Music</h1>
+                <p class="mt-4 text-base sm:text-lg text-slate-300 font-medium leading-relaxed">"When the world fall, music speaks."</p>
             </div>
         </div>
     </div>
@@ -17,8 +20,7 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
                 <div>
-                    <span class="inline-block rounded-full bg-gray-100 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-gray-900">Visi & Misi</span>
-                    <h2 class="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">Wadah Seni & Kreativitas Musik SMKN 1 Purwokerto</h2>
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Wadah Seni & Kreativitas Musik SMKN 1 Purwokerto</h2>
                     <p class="mt-6 text-base leading-relaxed text-gray-600 font-medium">
                         Smecone Music merupakan ekstrakurikuler musik resmi di SMKN 1 Purwokerto. Kami berkomitmen untuk menjadi ruang berekspresi, mengasah bakat bermusik, serta membangun karakter kepemimpinan dan kekeluargaan di antara para anggotanya.
                     </p>
@@ -36,27 +38,89 @@
                 </div>
             </div>
 
-            <div class="mt-24 grid grid-cols-1 gap-8 sm:grid-cols-3">
-                <div class="group rounded-3xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10">
-                    <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-200/50 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+            <div class="mt-16 flex flex-col lg:flex-row h-auto lg:h-[340px] gap-4 w-full">
+                <!-- Card 1 -->
+                <div class="group relative flex flex-col lg:flex-row lg:flex-1 w-full overflow-hidden rounded-[2rem] bg-brand-50 border border-brand-100/50 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] hover:lg:flex-[2.5] cursor-default">
+                    <!-- Left Info -->
+                    <div class="flex w-full lg:w-[260px] shrink-0 flex-col justify-between p-8 z-10">
+                        <div>
+                            <h3 class="text-2xl font-black text-brand-950 leading-tight">Latihan<br>Rutin</h3>
+                        </div>
+                        <div class="mt-8 flex items-center gap-2">
+                            <span class="text-sm font-bold text-brand-800">Baca Detail</span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-200/50 text-brand-800 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                                <svg class="h-4 w-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-extrabold text-gray-900 group-hover:text-brand-700 transition-colors">Studio & Fasilitas</h3>
-                    <p class="mt-3 text-sm leading-relaxed text-gray-600 font-medium">Dilengkapi studio musik (STM) ber-AC, alat musik lengkap (gitar, bass, drum, keyboard, sound system), dan ruang diskusi.</p>
+                    
+                    <!-- Right Content -->
+                    <div class="relative flex flex-1 items-center overflow-hidden">
+                        <div class="flex w-full items-center gap-6 p-8 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-x-8 lg:group-hover:translate-x-0 transition-all duration-700 delay-100 min-w-[300px]">
+                            <div class="flex-1">
+                                <p class="text-brand-900 font-semibold leading-relaxed">Jadwal latihan terstruktur dengan pembimbing berpengalaman di Studio Musik (STM).</p>
+                            </div>
+                            <div class="hidden md:flex h-24 w-24 shrink-0 rounded-2xl bg-brand-100/80 items-center justify-center text-brand-600 shadow-sm border border-brand-200/50">
+                                <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="group rounded-3xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10">
-                    <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-200/50 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+
+                <!-- Card 2 -->
+                <div class="group relative flex flex-col lg:flex-row lg:flex-1 w-full overflow-hidden rounded-[2rem] bg-brand-50 border border-brand-100/50 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] hover:lg:flex-[2.5] cursor-default">
+                    <!-- Left Info -->
+                    <div class="flex w-full lg:w-[260px] shrink-0 flex-col justify-between p-8 z-10">
+                        <div>
+                            <h3 class="text-2xl font-black text-brand-950 leading-tight">Kompetisi<br>FLS3N</h3>
+                        </div>
+                        <div class="mt-8 flex items-center gap-2">
+                            <span class="text-sm font-bold text-brand-800">Baca Detail</span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-200/50 text-brand-800 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                                <svg class="h-4 w-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-extrabold text-gray-900 group-hover:text-brand-700 transition-colors">Prestasi FLS3N</h3>
-                    <p class="mt-3 text-sm leading-relaxed text-gray-600 font-medium">Rutin meraih juara pada ajang FLS3N tingkat kab/kota hingga Jawa Tengah dalam cabang cipta lagu & solo vocal.</p>
+                    
+                    <!-- Right Content -->
+                    <div class="relative flex flex-1 items-center overflow-hidden">
+                        <div class="flex w-full items-center gap-6 p-8 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-x-8 lg:group-hover:translate-x-0 transition-all duration-700 delay-100 min-w-[300px]">
+                            <div class="flex-1">
+                                <p class="text-brand-900 font-semibold leading-relaxed">Aktif mengikuti FLS3N dan berbagai kompetisi musik tingkat regional hingga nasional.</p>
+                            </div>
+                            <div class="hidden md:flex h-24 w-24 shrink-0 rounded-2xl bg-brand-100/80 items-center justify-center text-brand-600 shadow-sm border border-brand-200/50">
+                                <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="group rounded-3xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-brand-200 hover:shadow-xl hover:shadow-brand-500/10">
-                    <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-200/50 transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+
+                <!-- Card 3 -->
+                <div class="group relative flex flex-col lg:flex-row lg:flex-1 w-full overflow-hidden rounded-[2rem] bg-brand-50 border border-brand-100/50 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] hover:lg:flex-[2.5] cursor-default">
+                    <!-- Left Info -->
+                    <div class="flex w-full lg:w-[260px] shrink-0 flex-col justify-between p-8 z-10">
+                        <div>
+                            <h3 class="text-2xl font-black text-brand-950 leading-tight">Komunitas<br>Solid</h3>
+                        </div>
+                        <div class="mt-8 flex items-center gap-2">
+                            <span class="text-sm font-bold text-brand-800">Baca Detail</span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-200/50 text-brand-800 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                                <svg class="h-4 w-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-extrabold text-gray-900 group-hover:text-brand-700 transition-colors">Keluargaan & Solidaritas</h3>
-                    <p class="mt-3 text-sm leading-relaxed text-gray-600 font-medium">Bukan sekadar latihan, tetapi juga tempat menjalin persahabatan erat dan jaringan alumni musik yang solid.</p>
+                    
+                    <!-- Right Content -->
+                    <div class="relative flex flex-1 items-center overflow-hidden">
+                        <div class="flex w-full items-center gap-6 p-8 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-x-8 lg:group-hover:translate-x-0 transition-all duration-700 delay-100 min-w-[300px]">
+                            <div class="flex-1">
+                                <p class="text-brand-900 font-semibold leading-relaxed">Bergabung dengan puluhan siswa yang berbagi passion yang sama terhadap musik.</p>
+                            </div>
+                            <div class="hidden md:flex h-24 w-24 shrink-0 rounded-2xl bg-brand-100/80 items-center justify-center text-brand-600 shadow-sm border border-brand-200/50">
+                                <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

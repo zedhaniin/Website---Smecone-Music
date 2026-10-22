@@ -11,6 +11,7 @@
     </div>
 
     {{-- Add Form Card --}}
+    @can('create_showcases')
     <div class="mb-8 rounded-3xl border border-slate-200/60 bg-white p-6 shadow-sm">
         <h3 class="mb-4 text-xs font-extrabold uppercase tracking-wider text-slate-900">Tambah Showcase Baru</h3>
         <form method="POST" action="{{ route('admin.showcases.store') }}" class="flex flex-col gap-4">
@@ -47,6 +48,7 @@
             </div>
         </form>
     </div>
+    @endcan
 
     {{-- Showcase List --}}
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -68,12 +70,18 @@
                 </div>
 
                 <div class="px-6 pb-6 pt-0">
+                    @can('delete_showcases')
                     <form method="POST" action="{{ route('admin.showcases.destroy', $showcase) }}" onsubmit="return confirm('Hapus showcase ini?')">
                         @csrf @method('DELETE')
                         <button type="submit" class="w-full rounded-xl bg-rose-100 px-3 py-2 text-xs font-extrabold text-rose-900 transition-colors hover:bg-rose-200">
                             Hapus Showcase
                         </button>
                     </form>
+                    @else
+                    <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-100 w-full justify-center">
+                        Mode View-Only
+                    </span>
+                    @endcan
                 </div>
             </div>
         @empty

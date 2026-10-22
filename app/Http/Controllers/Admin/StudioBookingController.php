@@ -18,6 +18,8 @@ class StudioBookingController extends Controller
 
     public function approve(StudioBooking $booking): RedirectResponse
     {
+        abort_unless(auth()->user()->can('approve_bookings'), 403, 'Anda tidak memiliki hak akses untuk menyetujui booking studio.');
+
         if ($booking->overlapsWithApproved()) {
             return back()->with('error', 'Jadwal bentrok dengan booking yang sudah disetujui.');
         }
@@ -29,6 +31,8 @@ class StudioBookingController extends Controller
 
     public function reject(StudioBooking $booking): RedirectResponse
     {
+        abort_unless(auth()->user()->can('approve_bookings'), 403, 'Anda tidak memiliki hak akses untuk menolak booking studio.');
+
         $booking->update(['status' => 'rejected']);
 
         return back()->with('success', 'Booking studio berhasil ditolak.');

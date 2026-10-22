@@ -15,6 +15,7 @@ class StudioBooking extends Model
         'start_time',
         'end_time',
         'purpose',
+        'permission_letter_path',
         'status',
     ];
 

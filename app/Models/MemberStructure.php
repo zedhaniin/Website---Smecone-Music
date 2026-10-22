@@ -10,11 +10,17 @@ class MemberStructure extends Model
     use HasFactory;
 
     protected $fillable = [
+        'division_id',
         'name',
         'position',
         'image_path',
         'order',
     ];
+
+    public function division(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Division::class, 'division_id');
+    }
 
     public static array $positions = [
         'Pengurus Inti' => [
@@ -87,6 +93,14 @@ class MemberStructure extends Model
             $weights = static::getPositionWeights();
             if (isset($weights[$member->position])) {
                 $member->order = $weights[$member->position];
+            }
+
+            if (empty($member->division_id)) {
+                $group = $member->division_group;
+                $division = Division::where('name', $group)->first();
+                if ($division) {
+                    $member->division_id = $division->id;
+                }
             }
         });
     }

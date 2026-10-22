@@ -31,6 +31,10 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-3 shrink-0">
+                <a href="{{ route('user.instruments.index') }}" class="inline-flex items-center gap-2 rounded-2xl bg-brand-900 border border-brand-700/60 px-4 py-3 text-xs font-extrabold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-850">
+                    <svg class="h-4 w-4 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                    <span>Katalog Alat</span>
+                </a>
                 <a href="{{ route('user.borrowing.create') }}" class="inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-xs font-extrabold text-brand-950 shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-50">
                     <svg class="h-4 w-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                     <span>Pinjam Alat Musik</span>
@@ -131,37 +135,55 @@
                     <div class="px-6 py-8 text-center text-xs font-semibold text-slate-400">Belum ada riwayat peminjaman alat.</div>
                 @endforelse
             </div>
+            @if($borrowings->count() > 0)
+                <div class="p-3 bg-slate-50/80 border-t border-slate-100 text-center">
+                    <a href="{{ route('user.borrowings.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors">
+                        <span>Lihat Seluruh Tracking Peminjaman ({{ $borrowings->count() }})</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+            @endif
         </div>
 
         {{-- Preview: Riwayat Booking Studio --}}
-        <div class="rounded-3xl border border-slate-200/60 bg-white shadow-sm overflow-hidden">
-            <div class="flex items-center justify-between border-b border-slate-100 px-6 py-4">
-                <div>
-                    <h3 class="text-sm font-extrabold text-slate-900">Riwayat Booking Studio Saya</h3>
-                    <p class="text-[11px] text-slate-400 font-semibold">{{ $bookings->count() }} Permohonan</p>
-                </div>
-                <a href="{{ route('user.booking.create') }}" class="inline-flex items-center gap-1 rounded-xl bg-brand-50 px-3 py-1.5 text-xs font-extrabold text-brand-700 hover:bg-brand-100 transition-colors">
-                    + Ajukan Booking
-                </a>
-            </div>
-            <div class="divide-y divide-slate-100">
-                @forelse($bookings->take(4) as $booking)
-                    <div class="flex items-center justify-between px-6 py-4 transition-colors hover:bg-slate-50/70">
-                        <div class="min-w-0 flex-1">
-                            <p class="truncate text-xs font-extrabold text-slate-900">{{ $booking->purpose }}</p>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-0.5">{{ $booking->start_time->format('d M Y H:i') }} — {{ $booking->end_time->format('H:i') }}</p>
-                        </div>
-                        <span class="ml-3 shrink-0 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider
-                            {{ $booking->status === 'pending' ? 'bg-amber-100 text-amber-900 border border-amber-200/80' : '' }}
-                            {{ $booking->status === 'approved' ? 'bg-emerald-100 text-emerald-900 border border-emerald-200' : '' }}
-                            {{ $booking->status === 'rejected' ? 'bg-rose-100 text-rose-900 border border-rose-200/80' : '' }}">
-                            {{ ucfirst($booking->status) }}
-                        </span>
+        <div class="rounded-3xl border border-slate-200/60 bg-white shadow-sm overflow-hidden flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+                    <div>
+                        <h3 class="text-sm font-extrabold text-slate-900">Riwayat Booking Studio Saya</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold">{{ $bookings->count() }} Permohonan</p>
                     </div>
-                @empty
-                    <div class="px-6 py-8 text-center text-xs font-semibold text-slate-400">Belum ada riwayat booking studio.</div>
-                @endforelse
+                    <a href="{{ route('user.booking.create') }}" class="inline-flex items-center gap-1 rounded-xl bg-brand-50 px-3 py-1.5 text-xs font-extrabold text-brand-700 hover:bg-brand-100 transition-colors">
+                        + Ajukan Booking
+                    </a>
+                </div>
+                <div class="divide-y divide-slate-100">
+                    @forelse($bookings->take(4) as $booking)
+                        <div class="flex items-center justify-between px-6 py-4 transition-colors hover:bg-slate-50/70">
+                            <div class="min-w-0 flex-1">
+                                <p class="truncate text-xs font-extrabold text-slate-900">{{ $booking->purpose }}</p>
+                                <p class="text-[11px] font-semibold text-slate-500 mt-0.5">{{ $booking->start_time->format('d M Y H:i') }} — {{ $booking->end_time->format('H:i') }}</p>
+                            </div>
+                            <span class="ml-3 shrink-0 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider
+                                {{ $booking->status === 'pending' ? 'bg-amber-100 text-amber-900 border border-amber-200/80' : '' }}
+                                {{ $booking->status === 'approved' ? 'bg-emerald-100 text-emerald-900 border border-emerald-200' : '' }}
+                                {{ $booking->status === 'rejected' ? 'bg-rose-100 text-rose-900 border border-rose-200/80' : '' }}">
+                                {{ ucfirst($booking->status) }}
+                            </span>
+                        </div>
+                    @empty
+                        <div class="px-6 py-8 text-center text-xs font-semibold text-slate-400">Belum ada riwayat booking studio.</div>
+                    @endforelse
+                </div>
             </div>
+            @if($bookings->count() > 0)
+                <div class="p-3 bg-slate-50/80 border-t border-slate-100 text-center">
+                    <a href="{{ route('user.bookings.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors">
+                        <span>Lihat Seluruh Tracking Booking Ruangan ({{ $bookings->count() }})</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

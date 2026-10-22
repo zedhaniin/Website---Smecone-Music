@@ -20,15 +20,19 @@ class InstrumentController extends Controller
 
     public function create(): View
     {
+        abort_unless(auth()->user()->can('create_instruments'), 403, 'Anda tidak memiliki hak akses untuk menambah alat musik.');
+
         return view('admin.instruments.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
+        abort_unless(auth()->user()->can('create_instruments'), 403, 'Anda tidak memiliki hak akses untuk menambah alat musik.');
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:5120'],
             'quantity' => ['required', 'integer', 'min:1'],
             'is_available' => ['boolean'],
         ]);
@@ -47,15 +51,19 @@ class InstrumentController extends Controller
 
     public function edit(Instrument $instrument): View
     {
+        abort_unless(auth()->user()->can('edit_instruments'), 403, 'Anda tidak memiliki hak akses untuk mengubah alat musik.');
+
         return view('admin.instruments.edit', compact('instrument'));
     }
 
     public function update(Request $request, Instrument $instrument): RedirectResponse
     {
+        abort_unless(auth()->user()->can('edit_instruments'), 403, 'Anda tidak memiliki hak akses untuk mengubah alat musik.');
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:5120'],
             'quantity' => ['required', 'integer', 'min:1'],
             'is_available' => ['boolean'],
         ]);
@@ -77,6 +85,8 @@ class InstrumentController extends Controller
 
     public function destroy(Instrument $instrument): RedirectResponse
     {
+        abort_unless(auth()->user()->can('delete_instruments'), 403, 'Anda tidak memiliki hak akses untuk menghapus alat musik.');
+
         if ($instrument->image_path) {
             Storage::disk('public')->delete($instrument->image_path);
         }

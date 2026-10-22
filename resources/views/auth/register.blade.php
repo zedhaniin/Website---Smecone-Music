@@ -5,8 +5,9 @@
 @section('content')
     <h2 class="mb-6 text-lg font-bold text-gray-900">Buat Akun Baru</h2>
 
-    <div class="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-        <strong>Perhatian:</strong> Setelah mendaftar, akun Anda harus disetujui oleh Admin sebelum bisa login.
+    <div class="mb-4 rounded-xl border border-brand-200 bg-brand-50/70 px-4 py-3 text-xs text-brand-900 font-semibold flex items-center gap-2.5">
+        <svg class="h-4 w-4 text-brand-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Setelah mendaftar, kode OTP 6 digit akan dikirimkan ke email Anda untuk langsung mengaktifkan akun.</span>
     </div>
 
     <form method="POST" action="{{ route('register') }}" class="flex flex-col gap-5">

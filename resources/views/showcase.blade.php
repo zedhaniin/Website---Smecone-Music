@@ -3,24 +3,27 @@
 @section('title', 'Prestasi & Karya - Smecone Music')
 
 @section('content')
-    <div class="bg-gradient-to-b from-gray-900 to-brand-950 pt-28 pb-20 text-white sm:pt-36 sm:pb-28">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {{-- Hero Header Banner --}}
+    <div class="relative overflow-hidden bg-gradient-to-b from-brand-950 via-brand-900 to-slate-950 pt-28 pb-16 text-white sm:pt-36 sm:pb-20">
+        <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-brand-500/15 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none"></div>
+
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
-                <span class="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand-200 backdrop-blur-md">Portofolio</span>
-                <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Prestasi & Karya</h1>
-                <p class="mt-4 text-lg text-brand-200/90 font-medium">Koleksi lengkap penampilan video YouTube dan postingan Instagram FLS3N Smecone Music.</p>
+                <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Prestasi & Karya</h1>
+                <p class="mt-4 text-base sm:text-lg text-slate-300 font-medium leading-relaxed">Koleksi lengkap penampilan video YouTube dan postingan Instagram FLS3N Smecone Music.</p>
             </div>
         </div>
     </div>
 
-    <section class="py-20 sm:py-28 bg-white">
+    <section class="py-20 sm:py-28 bg-slate-50/70">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             @if($showcases->count() > 0)
                 <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                     @foreach($showcases as $showcase)
-                        <div class="group flex flex-col justify-between overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-md shadow-gray-200/50 transition-all duration-300 hover:-translate-y-2 hover:border-brand-300 hover:shadow-2xl hover:shadow-brand-500/15">
+                        <div class="group flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-3 shadow-lg shadow-slate-200/60 transition-all duration-300 hover:-translate-y-2 hover:border-brand-400 hover:shadow-2xl hover:shadow-brand-500/15">
                             {{-- Media Top Container --}}
-                            <div class="relative w-full aspect-[16/9] bg-gray-950 overflow-hidden">
+                            <div class="relative w-full aspect-[16/9] bg-slate-950 overflow-hidden rounded-2xl shadow-sm">
                                 @if($showcase->embed_type === 'youtube')
                                     @php
                                         preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/', $showcase->embed_url, $matches);
@@ -39,16 +42,16 @@
                             </div>
 
                             {{-- Card Body --}}
-                            <div class="flex flex-1 flex-col justify-between p-6">
+                            <div class="flex flex-1 flex-col justify-between p-4 pt-5">
                                 <div>
-                                    <h3 class="text-lg font-extrabold leading-snug tracking-tight text-gray-900 group-hover:text-brand-700 transition-colors duration-200">{{ $showcase->title }}</h3>
+                                    <h3 class="text-lg font-extrabold leading-snug tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors duration-200">{{ $showcase->title }}</h3>
                                     @if($showcase->description)
-                                        <p class="mt-2.5 text-sm leading-relaxed text-gray-600 font-medium">{{ $showcase->description }}</p>
+                                        <p class="mt-2 text-sm leading-relaxed text-slate-600 font-medium line-clamp-2">{{ $showcase->description }}</p>
                                     @endif
                                 </div>
 
-                                <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
-                                    <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider {{ $showcase->embed_type === 'youtube' ? 'bg-red-50 text-red-600 ring-1 ring-red-200/60' : 'bg-pink-50 text-pink-600 ring-1 ring-pink-200/60' }}">
+                                <div class="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                                    <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider {{ $showcase->embed_type === 'youtube' ? 'bg-red-50 text-red-600 border border-red-200/60' : 'bg-pink-50 text-pink-600 border border-pink-200/60' }}">
                                         @if($showcase->embed_type === 'youtube')
                                             <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                                             YouTube
@@ -58,7 +61,7 @@
                                         @endif
                                     </span>
 
-                                    <a href="{{ $showcase->embed_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-gray-500 transition-colors duration-200 hover:text-brand-600">
+                                    <a href="{{ $showcase->embed_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-extrabold text-slate-700 transition-all duration-200 hover:bg-brand-600 hover:text-white hover:shadow-md">
                                         <span>Buka Post</span>
                                         <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                     </a>

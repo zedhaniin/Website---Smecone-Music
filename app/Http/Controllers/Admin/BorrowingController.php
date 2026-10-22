@@ -18,6 +18,8 @@ class BorrowingController extends Controller
 
     public function approve(Borrowing $borrowing): RedirectResponse
     {
+        abort_unless(auth()->user()->can('approve_borrowings'), 403, 'Anda tidak memiliki hak akses untuk menyetujui peminjaman.');
+
         $borrowing->update(['status' => 'approved']);
 
         return back()->with('success', 'Peminjaman berhasil disetujui.');
@@ -25,6 +27,8 @@ class BorrowingController extends Controller
 
     public function reject(Borrowing $borrowing): RedirectResponse
     {
+        abort_unless(auth()->user()->can('approve_borrowings'), 403, 'Anda tidak memiliki hak akses untuk menolak peminjaman.');
+
         $borrowing->update(['status' => 'rejected']);
 
         return back()->with('success', 'Peminjaman berhasil ditolak.');
@@ -32,6 +36,8 @@ class BorrowingController extends Controller
 
     public function returned(Borrowing $borrowing): RedirectResponse
     {
+        abort_unless(auth()->user()->can('approve_borrowings'), 403, 'Anda tidak memiliki hak akses untuk menandai pengembalian alat.');
+
         $borrowing->update(['status' => 'returned']);
 
         return back()->with('success', 'Alat berhasil ditandai sebagai dikembalikan.');

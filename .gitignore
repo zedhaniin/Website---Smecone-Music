@@ -25,3 +25,12 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Reports & Documentation (kept local for teacher submission)
+*.docx
+*.doc
+~$*
+LAPORAN_SDLC_SMECONE_MUSIC.*
+SOFTWARE DEVELOPMENT LIFE CYCLE.*
+/Dokumentasi/
+/Foto_Kepengurusan_2025/
