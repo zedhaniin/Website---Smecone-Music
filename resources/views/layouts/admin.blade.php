@@ -742,6 +742,10 @@
                 openProfileModal('{{ ($errors->has('current_password') || $errors->has('password')) ? 'password' : 'info' }}');
             @endif
 
+            if (new URLSearchParams(window.location.search).has('open_profile')) {
+                openProfileModal('info');
+            }
+
             // Auto-hide flash messages after 5 seconds
             setTimeout(() => {
                 document.querySelectorAll('#flash-success, #flash-error').forEach(el => {

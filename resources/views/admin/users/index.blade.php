@@ -377,5 +377,12 @@
                 closeUserDetail();
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (new URLSearchParams(window.location.search).has('open_detail')) {
+                const btn = document.querySelector('button[onclick*="openUserDetail"]');
+                if (btn) btn.click();
+            }
+        });
     </script>
 @endsection

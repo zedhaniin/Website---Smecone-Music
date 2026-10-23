@@ -1,7 +1,7 @@
 # 🎵 SMECONE MUSIC — Sistem Informasi & Manajemen Ekstrakurikuler
 
 <p align="center">
-  <img src="public/images/logo.png" alt="Logo Smecone Music" width="130" style="border-radius: 20px;">
+  <img src="public/images/logo.png" alt="Logo Smecone Music" width="140" style="border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);">
 </p>
 
 <p align="center">
@@ -22,47 +22,52 @@
 
 ## 📌 Daftar Isi
 1. [Tentang Proyek](#-tentang-proyek)
-2. [Latar Belakang & Tujuan](#-latar-belakang--tujuan)
-3. [Arsitektur & Skema Basis Data](#-arsitektur--skema-basis-data)
-4. [Daftar Fitur & Tampilan Antarmuka](#-daftar-fitur--tampilan-antarmuka)
-   - [A. Area Publik](#a-area-publik)
-   - [B. Autentikasi & Keamanan Akun](#b-autentikasi--keamanan-akun)
+2. [Latar Belakang & Identifikasi Masalah](#-latar-belakang--identifikasi-masalah)
+3. [Tujuan & Manfaat Sistem](#-tujuan--manfaat-sistem)
+4. [Arsitektur & Skema Basis Data (12 Tabel)](#-arsitektur--skema-basis-data-12-tabel)
+5. [📸 Dokumentasi Visual Aplikasi (Per Halaman Lengkap)](#-dokumentasi-visual-aplikasi-per-halaman-lengkap)
+   - [A. Area Publik & Branding Sekolah](#a-area-publik--branding-sekolah)
+   - [B. Autentikasi, Keamanan, & OTP](#b-autentikasi-keamanan--otp)
    - [C. Area Siswa / Anggota (User Dashboard)](#c-area-siswa--anggota-user-dashboard)
    - [D. Area Panel Administrator & Pengurus](#d-area-panel-administrator--pengurus)
-5. [Role & Matriks Hak Akses (RBAC)](#-role--matriks-hak-akses-rbac)
-6. [Hasil Pengujian Kualitas (Testing & QA)](#-hasil-pengujian-kualitas-testing--qa)
-7. [Panduan Instalasi & Menjalankan](#-panduan-instalasi--menjalankan)
-8. [Akun Default Demo](#-akun-default-demo)
+6. [🛡️ Role-Based Access Control (RBAC) & Matriks Hak Akses](#️-role-based-access-control-rbac--matriks-hak-akses)
+7. [🧪 Pengujian Kualitas Perangkat Lunak (Automated QA 100% Pass)](#-pengujian-kualitas-perangkat-lunak-automated-qa-100-pass)
+8. [🚀 Panduan Instalasi & Menjalankan Proyek](#-panduan-instalasi--menjalankan-proyek)
+9. [🔑 Kredensial Akun Default Demo](#-kredensial-akun-default-demo)
 
 ---
 
 ## 📖 Tentang Proyek
-**Smecone Music Web Application** adalah platform digital berbasis web yang dirancang khusus untuk memfasilitasi tata kelola operasional, peminjaman aset alat musik, reservasi Studio Musik (STM), serta publikasi portofolio ekstrakurikuler musik di **SMK Negeri 1 Purwokerto**. 
+**Smecone Music Web Application** adalah platform digital komprehensif berbasis web yang dirancang khusus untuk memodernisasi tata kelola operasional, peminjaman instrumen inventaris sekolah, reservasi Studio Musik (STM), serta publikasi prestasi dan etalase karya ekstrakurikuler musik di **SMK Negeri 1 Purwokerto**.
 
-Aplikasi ini mengintegrasikan antarmuka publik yang estetis dan modern bernuansa *dark-mode* musik dengan sistem informasi manajemen internal berjenjang berbasis peran (*Role-Based Access Control*).
-
----
-
-## 🎯 Latar Belakang & Tujuan
-
-### Latar Belakang
-Sebelum sistem ini dikembangkan, operasional Smecone Music menghadapi beberapa kendala nyata:
-1. **Pencatatan Peminjaman Alat Masih Konvensional**: Peminjaman alat musik inventaris sekolah dicatat di buku tulis atau chat WhatsApp, sehingga riwayat peminjaman rawan tercecer dan kondisi fisik alat sulit dipantau seksi Perlengkapan (Perkap).
-2. **Bentrok Jadwal Studio Musik (STM)**: Sering terjadi benturan jadwal latihan antar grup band atau sesi vokal karena tidak adanya kalender ketersediaan studio terpusat.
-3. **Ketiadaan Sistem Verifikasi Identitas Siswa**: Pengurus kesulitan memastikan apakah peminjam fasilitas benar-benar siswa aktif SMKN 1 Purwokerto dan anggota musik terdaftar.
-4. **Keterbatasan Media Promosi Resmi**: Siswa dan pihak luar kesulitan mengakses informasi resmi mengenai struktur kepengurusan, dokumentasi kegiatan, dan prestasi kejuaraan FLS3N / festival musik.
-
-### Tujuan Utama
-* **Digitalisasi Tata Kelola**: Mentransformasikan birokrasi peminjaman inventaris dan reservasi studio dari manual menjadi digital yang transparan dan akuntabel.
-* **Tertib Birokrasi Sekolah**: Penerapan wajib unggah surat permohonan izin untuk peminjaman alat maupun pemesanan Studio STM.
-* **Sentralisasi Data & Verifikasi Anggota**: Mempermudah pendataan kelas, nomor kontak WhatsApp, dan divisi musik anggota.
-* **Showcase Prestasi & Branding**: Menyajikan etalase resmi kebanggaan sekolah untuk menampilkan galeri kegiatan interaktif dan koleksi trofi prestasi.
+Aplikasi ini mengintegrasikan antarmuka publik modern bernuansa *dark-mode* seni musik dengan sistem manajemen operasional berjenjang (*Role-Based Access Control*), verifikasi pendaftaran mandiri kode OTP via Google SMTP Gmail, pencegahan tabrakan jam latihan (*Conflict-Free Studio Scheduling*), serta integrasi verifikasi identitas siswa dengan tombol chat WhatsApp langsung.
 
 ---
 
-## 🗄️ Arsitektur & Skema Basis Data
+## 🎯 Latar Belakang & Identifikasi Masalah
 
-Sistem didukung oleh **MySQL Relational Database** dengan 12 tabel utama yang ternormalisasi:
+Sebelum sistem ini dibangun, operasional harian Smecone Music menghadapi beberapa tantangan nyata:
+1. **Pencatatan Peminjaman Alat Masih Konvensional**: Peminjaman instrumen musik sekolah (gitar, bass, drum kit, amplifier, kabel jack) dicatat secara manual di buku tulis atau percakapan WhatsApp pribadi. Hal ini mengakibatkan data mudah tercecer, riwayat peminjam tidak terlacak, dan kondisi fisik alat sulit dipertanggungjawabkan oleh Seksi Perlengkapan (Perkap).
+2. **Bentrok Jadwal Latihan Studio STM**: Ketiadaan kalender ketersediaan ruangan studio terpusat memicu seringnya terjadi tumpang tindih waktu latihan antar grup band atau sesi latihan vokal, terutama menjelang event besar sekolah.
+3. **Ketiadaan Sistem Verifikasi Keabsahan Siswa**: Pengurus kesulitan memastikan secara cepat apakah peminjam fasilitas benar-benar siswa aktif SMKN 1 Purwokerto dan anggota musik terdaftar.
+4. **Birokrasi Perizinan Tidak Tertib**: Belum adanya integrasi berkas digital surat permohonan izin bertanda tangan guru/pembina untuk penggunaan aset inventaris dan ruangan sekolah.
+5. **Keterbatasan Media Publikasi & Branding Resmi**: Calon anggota, orang tua, dan masyarakat sekolah kesulitan mengakses informasi resmi mengenai struktur kepengurusan, jadwal latihan mingguan, dan pencapaian piala kejuaraan FLS3N.
+
+---
+
+## 💡 Tujuan & Manfaat Sistem
+
+* **Digitalisasi Tata Kelola Total**: Mengubah proses manual menjadi alur digital yang transparan, tercatat rapi, dan mudah diaudit.
+* **Pencegahan Konflik Jadwal (Conflict-Free Scheduling)**: Validasi otomatis pada level basis data dan server untuk memastikan tidak ada pemesanan Studio STM pada slot waktu yang bertabrakan.
+* **Tertib Administrasi Sekolah**: Kewajiban unggah berkas surat permohonan izin (PDF/JPG/PNG) bertanda tangan resmi sebelum permohonan pinjam alat maupun reservasi studio disetujui pengurus.
+* **Verifikasi Cepat Identitas Anggota**: Fitur modal verifikasi terpadu menampilkan nama, kelas, no WhatsApp, divisi musik, status verifikasi OTP Gmail, dan tombol tautan **Chat WhatsApp** langsung.
+* **Showcase Prestasi & Portofolio**: Etalase visual modern untuk memamerkan galeri interaktif kegiatan ekskul dan trofi kejuaraan seni musik SMKN 1 Purwokerto.
+
+---
+
+## 🗄️ Arsitektur & Skema Basis Data (12 Tabel)
+
+Sistem didukung oleh **MySQL Relational Database** dengan 12 tabel yang ternormalisasi:
 
 ```mermaid
 erDiagram
@@ -182,141 +187,192 @@ erDiagram
         text description
         string image
     }
+
+    PASSWORD_RESET_TOKENS {
+        string email PK
+        string token
+        timestamp created_at
+    }
 ```
 
-### Ringkasan Tabel Database:
-| Nama Tabel | Deskripsi & Kegunaan |
+### Kamus Data Ringkas (12 Tabel Sistem):
+| Tabel | Kegunaan & Relasi |
 | :--- | :--- |
-| `users` | Menyimpan data akun siswa/pengurus, kelas, no WA, divisi musik, status verifikasi OTP, dan role. |
-| `roles` | Menyimpan master data role kepengurusan (Ketua, Wakil, Sekretaris, Bendahara, Perkap, PDD, Alat Musik, Anggota). |
-| `permissions` | Katalog perizinan granular fitur (`view_`, `create_`, `edit_`, `delete_`, `approve_`). |
-| `permission_role` | Tabel pivot relasi Many-to-Many antara role dan hak akses. |
-| `instruments` | Katalog inventaris alat musik (merk, kondisi fisik, status ketersediaan, serial number, foto). |
-| `borrowings` | Transaksi peminjaman alat, batas waktu kembali, berkas surat izin, dan status persetujuan. |
-| `studio_bookings` | Transaksi reservasi Studio STM, tanggal, jam mulai/selesai, surat izin, dan validasi bentrok. |
-| `divisions` | Master data 6 divisi kepengurusan (Pengurus Inti, Alat Musik, Vocal, Kegiatan, PDD, Perkap, Humas, Wirausaha). |
-| `member_structures` | Personalia struktur organisasi pengurus pada masing-masing divisi. |
+| `users` | Akun siswa dan pengurus, data kelas, no WA, divisi musik, status verifikasi OTP Gmail, dan role. |
+| `roles` | Master peran kepengurusan (Ketua, Wakil, Sekretaris, Bendahara, Perkap, PDD, Alat Musik, Anggota). |
+| `permissions` | Katalog hak akses perizinan granular modul (`view_`, `create_`, `edit_`, `delete_`, `approve_`). |
+| `permission_role` | Tabel pivot relasi *Many-to-Many* antara role dan izin akses. |
+| `instruments` | Inventaris alat musik (merk, tipe, kondisi fisik, status ketersediaan, serial number, foto). |
+| `borrowings` | Transaksi peminjaman alat, rentang tanggal pinjam/kembali, surat izin bertanda tangan, dan status. |
+| `studio_bookings` | Transaksi reservasi Studio STM, tanggal, jam mulai/selesai, surat izin, dan status persetujuan. |
+| `divisions` | Master data 6 divisi kepengurusan organisasi Smecone Music. |
+| `member_structures` | Personalia kepengurusan pada masing-masing divisi (nama, jabatan, urutan, foto). |
 | `galleries` | Album dokumentasi acara/kegiatan ekskul. |
-| `gallery_photos` | Koleksi multi-foto dalam satu album kegiatan. |
+| `gallery_photos` | Koleksi multi-foto dalam setiap album galeri dokumentasi kegiatan. |
 | `showcases` | Koleksi piala kejuaraan dan portofolio prestasi musik SMKN 1 Purwokerto. |
-| `password_reset_tokens` | Token keamanan reset kata sandi melalui tautan email Gmail. |
 
 ---
 
-## 🖥️ Daftar Fitur & Tampilan Antarmuka
+## 📸 Dokumentasi Visual Aplikasi (Per Halaman Lengkap)
 
-### A. Area Publik
-1. **Landing Page Utama (`/`)**:
-   - Header hero dinamis dengan tombol aksi cepat (*Jelajahi Divisi* & *Ajukan Pinjaman*).
-   - Profil filosofi & slogan ekskul (*"When the world falls, music speaks."*).
-   - Preview kartu divisi instrumen musik interaktif.
-   - Showcase piala prestasi pilihan & preview galeri kegiatan dengan *lightbox modal*.
-   - Footer informatif 3-kolom dengan tautan media sosial dan alamat SMKN 1 Purwokerto.
-2. **Halaman Tentang Kami (`/about`)**:
-   - Sejarah terbentuknya Smecone Music, Visi, Misi, dan 4 Pilar Organisasi.
-3. **Halaman Galeri Dokumentasi (`/gallery`)**:
-   - Album dokumentasi foto kegiatan ekskul dengan fitur *Lightbox Viewer* responsif.
-4. **Halaman Portofolio Prestasi (`/showcase`)**:
-   - Etalase rekam jejak juara FLS3N tingkat kabupaten/provinsi dan festival musik pelajar.
-5. **Halaman Struktur Organisasi (`/struktur`)**:
-   - Tampilan hierarki seluruh divisi kepengurusan beserta foto, nama, dan jabatan personalia.
+Berikut adalah tangkapan layar beresolusi tinggi untuk setiap halaman antarmuka sistem:
+
+### A. Area Publik & Branding Sekolah
+
+#### 1. Landing Page Utama (`/`)
+*Halaman depan publik dengan hero banner bertema musik, kutipan filosofis ekskul, kartu peminatan instrumen, piala prestasi kejuaraan FLS3N, agenda konser Student Act Festival, serta jadwal rutin Studio STM.*
+<p align="center">
+  <img src="docs/screenshots/01_landing.png" alt="Landing Page Smecone Music" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 2. Halaman Tentang Kami (`/about`)
+*Profil sejarah perjalanan Smecone Music di SMKN 1 Purwokerto, Visi, Misi, serta 4 Pilar Karakter pembinaan bermusik.*
+<p align="center">
+  <img src="docs/screenshots/02_about.png" alt="Halaman Tentang Kami" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 3. Halaman Galeri Dokumentasi Kegiatan (`/gallery`)
+*Arsip album foto dokumentasi kegiatan konser, latihan gabungan, dan workshop sound engineering dengan fitur interaktif Lightbox Viewer.*
+<p align="center">
+  <img src="docs/screenshots/03_gallery.png" alt="Halaman Galeri" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 4. Halaman Portofolio Prestasi (`/showcase`)
+*Etalase rekam jejak trofi kejuaraan festival musik pelajar dan lomba FLS3N tingkat kabupaten hingga provinsi.*
+<p align="center">
+  <img src="docs/screenshots/04_showcase.png" alt="Halaman Prestasi" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 5. Halaman Struktur Organisasi (`/struktur`)
+*Bagan hierarki personalia kepengurusan Smecone Music dari Pengurus Inti hingga seluruh divisi bidang teknis.*
+<p align="center">
+  <img src="docs/screenshots/05_struktur.png" alt="Halaman Struktur Organisasi" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
 
 ---
 
-### B. Autentikasi & Keamanan Akun
-1. **Registrasi Mandiri Siswa dengan OTP Gmail (`/register`)**:
-   - Siswa dapat mendaftar mandiri secara instan tanpa antre manual.
-   - Sistem mengirimkan kode verifikasi 6-digit secara realtime via **Google SMTP Gmail**.
-   - Halaman verifikasi OTP dilengkapi timer mundur 5 menit, tombol kirim ulang kode, dan auto-focus digit.
-2. **Sistem Login & Proteksi (`/login`)**:
-   - Login aman dengan proteksi CSRF dan enkripsi *bcrypt*.
-   - Fitur *Remember Me* untuk menyimpan sesi pengguna.
-3. **Lupa Password Terintegrasi Email (`/forgot-password`)**:
-   - Form permohonan reset password dengan validasi email terdaftar.
-   - Pengiriman tautan reset ke Gmail dengan template surat resmi bernuansa Smecone Music.
-   - Tombol langsung *"Buka Gmail Sekarang"* untuk mempermudah pengguna.
-   - Halaman pembuatan kata sandi baru (`/reset-password`) dengan verifikasi token kedaluwarsa.
+### B. Autentikasi, Keamanan, & OTP
+
+| Halaman Login (`/login`) | Halaman Registrasi Siswa (`/register`) | Halaman Lupa Password (`/forgot-password`) |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/06_login.png" width="300" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"> | <img src="docs/screenshots/07_register.png" width="300" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"> | <img src="docs/screenshots/08_forgot_password.png" width="300" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"> |
+| *Proteksi CSRF, bcrypt, & Remember Me* | *Registrasi mandiri terintegrasi OTP Google SMTP Gmail* | *Reset kata sandi aman via tautan email resmi* |
 
 ---
 
 ### C. Area Siswa / Anggota (User Dashboard)
-1. **Dashboard Anggota (`/dashboard`)**:
-   - Ringkasan peminjaman aktif dan jadwal latihan studio mendatang.
-2. **Form Peminjaman Alat Musik (`/peminjaman/create`)**:
-   - Pemilihan alat musik yang berstatus tersedia.
-   - Input tanggal pinjam dan rencana tanggal pengembalian.
-   - **Wajib Unggah Surat Izin**: Unggah berkas surat permohonan pinjam (PDF/JPG/PNG) bertanda tangan.
-3. **Reservasi Jadwal Studio STM (`/booking/create`)**:
-   - Pemilihan tanggal, jam mulai, dan jam selesai latihan.
-   - **Kalender Bebas Bentrok**: Sistem secara otomatis mengecek ketersediaan jam latihan; jika jadwal bertabrakan dengan band lain, sistem akan menolak dan memberi peringatan.
-   - **Wajib Unggah Surat Izin Studio**: Unggah surat izin kegiatan studio.
-4. **Pelacakan Status Pengajuan (`/peminjaman`, `/booking`)**:
-   - Riwayat pengajuan dengan badge status realtime (*Menunggu Persetujuan, Disetujui, Ditolak, Sudah Dikembalikan*).
-5. **Pengaturan Akun & Profil Mandiri (Navbar Modal)**:
-   - Ganti Nama Lengkap.
-   - Ganti Password dengan verifikasi password lama & toggle lihat sandi.
-   - Pengisian **Kelas / Jurusan** (contoh: *XII PPLG 2*).
-   - Pengisian **Nomor WhatsApp / Telepon**.
-   - Pemilihan **Divisi Musik** (*Divisi Alat Musik* atau *Divisi Vokal*).
-   - Status Kepengurusan (*Pengurus* atau *Anggota Reguler*).
+
+#### 1. Dashboard Siswa (`/dashboard`)
+*Tampilan beranda personal siswa menampilkan ringkasan status pinjam alat aktif dan jadwal latihan studio mendatang.*
+<p align="center">
+  <img src="docs/screenshots/09_user_dashboard.png" alt="Dashboard Siswa" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 2. Modal Pengaturan Profil Siswa & Ganti Password (Navbar)
+*Modal pengaturan mandiri anggota: pembaruan Nama Lengkap, Nomor WhatsApp, Kelas (contoh: XII PPLG 2), Divisi Musik (Alat Musik / Vokal), dan ganti kata sandi terverifikasi sandi lama.*
+<p align="center">
+  <img src="docs/screenshots/09b_profile_settings_modal.png" alt="Modal Pengaturan Akun" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 3. Katalog Inventaris Alat Musik (`/dashboard/instruments`)
+*Katalog alat musik sekolah yang berstatus tersedia untuk dipinjam siswa lengkap dengan foto alat, merk, dan kondisi fisik.*
+<p align="center">
+  <img src="docs/screenshots/10_user_instruments.png" alt="Katalog Alat Musik Siswa" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 4. Form Pengajuan Peminjaman Alat & Riwayat Siswa (`/dashboard/borrowing/create` & `/dashboard/borrowings`)
+*Formulir pengajuan peminjaman instrumen dengan kewajiban unggah surat izin bertanda tangan serta tabel pelacakan status realtime.*
+<p align="center">
+  <img src="docs/screenshots/11_user_borrowing_form.png" alt="Form Peminjaman Alat" width="450" style="border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+  <img src="docs/screenshots/12_user_borrowings.png" alt="Riwayat Peminjaman Alat" width="450" style="border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+</p>
+
+#### 5. Form Reservasi Studio STM & Riwayat Booking Siswa (`/dashboard/booking/create` & `/dashboard/bookings`)
+*Pemesanan jam latihan Studio STM dengan validasi anti-bentrok jadwal otomatis di level server, wajib unggah surat izin, dan tabel tracking riwayat pemesanan.*
+<p align="center">
+  <img src="docs/screenshots/13_user_booking_form.png" alt="Form Booking Studio STM" width="450" style="border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+  <img src="docs/screenshots/13b_user_bookings.png" alt="Riwayat Booking Studio" width="450" style="border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+</p>
+
+#### 6. Kalender Jadwal Latihan Studio STM (`/dashboard/calendar`)
+*Visualisasi kalender interaktif untuk memeriksa ketersediaan jam latihan Studio STM dan jadwal sesi yang sudah terisi.*
+<p align="center">
+  <img src="docs/screenshots/14_user_calendar.png" alt="Kalender Jadwal Studio STM" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
 
 ---
 
 ### D. Area Panel Administrator & Pengurus
-1. **Dashboard Statistik Admin (`/admin`)**:
-   - Metrik total inventaris alat musik, total peminjaman aktif, booking studio hari ini, dan jumlah akun siswa.
-2. **Manajemen Akun User (`/admin/users`)**:
-   - Tabel pengguna dengan sub-badge langsung di bawah nama: **Kelas** dan **Divisi Musik**.
-   - Indikator status verifikasi OTP Gmail (*Verified* / *Pending*).
-   - **Tombol "Detail" Identitas Siswa**:
-     - Menampilkan popup modal profil lengkap siswa.
-     - Memverifikasi keabsahan anak sekolah SMKN 1 Purwokerto dan anggota musik.
-     - **Tombol Langsung "Chat WhatsApp"**: Membuka tautan direct WhatsApp (`wa.me/...`) untuk memudahkan pengurus mengonfirmasi langsung ke siswa.
-     - Statistik rekam jejak jumlah pinjam alat dan booking studio.
-   - Tombol cepat *Setujui / Nonaktifkan* akun dan *Hapus User*.
-   - Dropdown pengubahan role pengguna secara instan.
-3. **Manajemen Role & Hak Akses Dinamis (`/admin/roles`)**:
-   - Tab navigasi role pengurus (default langsung aktif ke **Ketua**).
-   - **Dual Box Interaktif**: Kotak Katalog Izin Tersedia (kiri) vs Kotak Izin Aktif (kanan).
-   - Fitur **Drag & Drop** izin akses antar kotak.
-   - Tombol cepat **[+] Tambah** dan **[x] Cabut**.
-   - Tombol preset cepat **"Set View-Only"** untuk pengurus non-inti.
-   - Filter pencarian izin instan dan indikator jumlah izin aktif.
-   - Perlindungan sistem: Role Ketua & Wakil Ketua (Super Admin) memiliki izin permanen penuh dan tidak dapat dicabut.
-4. **Persetujuan Peminjaman Alat (`/admin/borrowings`)**:
-   - Tinjauan surat izin yang diunggah siswa peminjam.
-   - Tombol Setujui / Tolak peminjaman.
-   - Tombol pencatatan pengembalian fisik alat (*Returned*) saat alat diserahkan kembali ke seksi Perkap.
-5. **Persetujuan Reservasi Studio STM (`/admin/bookings`)**:
-   - Verifikasi jadwal dan surat pengajuan studio.
-   - Approval & Rejection reservasi studio.
-6. **Master Data Alat Musik (`/admin/instruments`)**:
-   - Tambah, edit, dan hapus katalog instrumen inventaris sekolah.
-   - Pengaturan merk, nomor seri, kondisi (Baik, Rusak Ringan, Perbaikan), dan status ketersediaan.
-7. **Content Management System (CMS Publik)**:
-   - **Kelola Struktur Pengurus (`/admin/members`)**: Tambah/edit pengurus divisi, jabatan, dan foto.
-   - **Kelola Galeri Acara (`/admin/galleries`)**: Tambah album kegiatan dan multi-upload foto.
-   - **Kelola Showcase Prestasi (`/admin/showcases`)**: Dokumentasi piala, tahun perolehan, dan peringkat lomba.
+
+#### 1. Dashboard Administrator & Pengurus (`/admin`)
+*Ringkasan metrik statistik operasional: total inventaris instrumen, peminjaman aktif, pemesanan studio hari ini, dan jumlah akun siswa terdaftar.*
+<p align="center">
+  <img src="docs/screenshots/14_admin_dashboard.png" alt="Dashboard Administrator" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 2. Manajemen Akun Pengguna & Sub-Badge Identitas (`/admin/users`)
+*Tabel manajemen akun pengguna dengan sub-badge langsung di bawah nama: **Kelas / Jurusan** dan **Pilihan Divisi Musik**, status verifikasi OTP Gmail, serta tombol aksi Detail verifikasi.*
+<p align="center">
+  <img src="docs/screenshots/15_admin_users.png" alt="Manajemen Akun User" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 3. Modal Detail Verifikasi Siswa SMKN 1 & Tombol Chat WhatsApp
+*Modal popup verifikasi untuk mendata keabsahan siswa aktif SMKN 1 Purwokerto dan anggota musik, dilengkapi **Tombol Chat WhatsApp** langsung ke nomor siswa.*
+<p align="center">
+  <img src="docs/screenshots/15b_admin_user_detail_modal.png" alt="Modal Detail Verifikasi Siswa" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 4. Manajemen Peran & Hak Akses Pengurus (`/admin/roles`)
+*Default navigasi tab role langsung aktif ke **Ketua (Super Admin)** dengan penjelasan hak akses permanen sistem.*
+<p align="center">
+  <img src="docs/screenshots/16_admin_roles.png" alt="Manajemen Role Ketua Default" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 5. Matriks Perizinan Akses Interaktif Drag & Drop (`/admin/roles?role=sekretaris`)
+*Dual-box interaktif (Katalog Izin Tersedia vs Izin Aktif Role) yang mendukung interaksi **Drag & Drop** HTML5, tombol assign cepat, search filter, dan preset tombol **Set View-Only**.*
+<p align="center">
+  <img src="docs/screenshots/16b_admin_roles_matrix.png" alt="Matriks Hak Akses Drag and Drop" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 6. Manajemen Master Inventaris Alat Musik (`/admin/instruments`)
+*Katalog master alat musik inventaris sekolah: pemantauan kondisi fisik (Baik, Rusak Ringan, Perbaikan), status ketersediaan, serial number, dan foto alat.*
+<p align="center">
+  <img src="docs/screenshots/17_admin_instruments.png" alt="Master Alat Musik Admin" width="920" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.18);">
+</p>
+
+#### 7. Persetujuan Transaksi & Layanan Operasional
+| Persetujuan Pinjam Alat (`/admin/borrowings`) | Persetujuan Booking Studio (`/admin/bookings`) |
+| :---: | :---: |
+| <img src="docs/screenshots/18_admin_borrowings.png" width="450" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);"> | <img src="docs/screenshots/19_admin_bookings.png" width="450" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);"> |
+| *Verifikasi surat izin peminjaman alat & pencatatan pengembalian fisik instrumen* | *Verifikasi berkas surat izin studio & persetujuan slot jadwal latihan STM* |
+
+#### 8. Modul CMS Konten Publik Ekskul
+| Personalia Pengurus (`/admin/members`) | Galeri Dokumentasi (`/admin/galleries`) | Trofi Prestasi (`/admin/showcases`) |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/20_admin_members.png" width="300" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"> | <img src="docs/screenshots/21_admin_galleries.png" width="300" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"> | <img src="docs/screenshots/22_admin_showcases.png" width="300" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"> |
+| *Kelola struktur divisi & personalia pengurus* | *Kelola album dokumentasi multi-foto kegiatan* | *Kelola daftar piala & rekam jejak juara* |
 
 ---
 
-## 🛡️ Role & Matriks Hak Akses (RBAC)
+## 🛡️ Role-Based Access Control (RBAC) & Matriks Hak Akses
 
-| Role Pengurus / Akun | Tingkat Akses | Hak Akses Utama |
+Sistem menerapkan hierarki hak akses berjenjang yang aman dan fleksibel:
+
+| Role Pengguna | Level Otoritas | Cakupan Hak Akses Utama |
 | :--- | :--- | :--- |
-| **Ketua & Wakil Ketua** | Super Admin | Akses penuh (*Full Access*) ke seluruh modul sistem, persetujuan transaksi, inventaris, akun, dan wewenang mutlak mengatur izin role lain. |
-| **Sekretaris & Bendahara** | Pengurus Inti | Kelola struktur kepengurusan, kelola akun anggota, verifikasi/approval peminjaman alat & reservasi studio. |
-| **Pengurus Divisi Perkap** | Pengurus | Kelola master inventaris alat musik, verifikasi peminjaman alat, dan pencatatan pengembalian fisik instrumen. |
-| **Pengurus Divisi PDD** | Pengurus | Kelola galeri dokumentasi foto kegiatan dan kelola showcase portofolio prestasi. |
-| **Pengurus Divisi Alat Musik** | Pengurus | Monitoring inventaris alat musik dan verifikasi peminjaman instrumen. |
-| **Pengurus Divisi Lain** | View-Only | Memiliki akses tinjau (*View-Only*) ke seluruh panel informasi operasional tanpa wewenang mengubah data. |
-| **Anggota Siswa (User)** | Member | Mengajukan pinjam alat, booking studio STM, tracking status, dan kelola profil mandiri. |
+| **Ketua & Wakil Ketua** | Super Admin | Akses mutlak (*Full Access*) ke seluruh modul sistem, persetujuan transaksi, inventaris, manajemen user, serta hak mengatur matriks izin role lain. |
+| **Sekretaris & Bendahara** | Pengurus Inti | Kelola struktur organisasi, verifikasi akun anggota, verifikasi/approval peminjaman alat & booking studio STM. |
+| **Pengurus Divisi Perkap** | Seksi Inventaris | Kelola master inventaris alat musik, verifikasi permohonan pinjam alat, dan pencatatan pengembalian fisik barang (*returned*). |
+| **Pengurus Divisi PDD** | Publikasi & Dok | Kelola album galeri dokumentasi foto kegiatan dan portofolio prestasi piala kejuaraan. |
+| **Pengurus Divisi Alat Musik** | Seksi Musik | Monitoring kondisi alat musik inventaris dan verifikasi peminjaman instrumen. |
+| **Pengurus Divisi Lain** | View-Only | Akses tinjau (*View-Only*) ke seluruh panel operasional tanpa wewenang mengubah data master. |
+| **Anggota Siswa (User)** | Member | Mengajukan pinjam alat, booking studio STM, tracking status transaksi, dan kelola profil mandiri. |
 
 ---
 
-## 🧪 Hasil Pengujian Kualitas (Testing & QA)
+## 🧪 Pengujian Kualitas Perangkat Lunak (Automated QA 100% Pass)
 
-Aplikasi telah diuji menggunakan framework automated testing **PHPUnit / Laravel Feature Tests**:
+Aplikasi telah diuji menggunakan framework automated testing **PHPUnit / Laravel Feature Tests** dengan hasil **100% PASS**:
 
 ```
 PASS  Tests\Feature\OtpRegistrationAndStudioLetterTest
@@ -353,7 +409,7 @@ PASS  Tests\Feature\RoleAndPermissionTest
 
 PASS  Tests\Feature\StudioBookingTest
   ✓ user can create studio booking
-  ✓ overlapping studio booking is rejected
+  ✓ overlapping studio booking is rejected (anti-bentrok jadwal)
   ✓ admin can approve studio booking
   ✓ admin can reject studio booking
 
@@ -367,10 +423,10 @@ Status:   100% PASS
 
 ---
 
-## 🚀 Panduan Instalasi & Menjalankan
+## 🚀 Panduan Instalasi & Menjalankan Proyek
 
 ### Persyaratan Sistem:
-* PHP >= 8.2 (Disarankan PHP 8.3)
+* PHP >= 8.2 (Direkomendasikan PHP 8.3)
 * Composer 2.x
 * MySQL >= 8.0 (Tersedia via Laragon / XAMPP)
 * Node.js >= 18.x & NPM
@@ -406,11 +462,11 @@ Status:   100% PASS
    ```
 
 4. **Migrasi Database & Seeder Data Awal**:
-   * Opsi A (Menggunakan Migration & Seeder Laravel):
+   * **Opsi A (Menggunakan Migration & Seeder Laravel)**:
      ```bash
      php artisan migrate --seed
      ```
-   * Opsi B (Import file SQL yang telah disediakan):
+   * **Opsi B (Import file SQL yang telah disediakan)**:
      Import berkas `database/smecone_music.sql` ke database MySQL `smecone_music` melalui phpMyAdmin / HeidiSQL.
 
 5. **Buat Symlink Penyimpanan Media**:
@@ -431,7 +487,7 @@ Status:   100% PASS
 
 ---
 
-## 🔑 Akun Default Demo
+## 🔑 Kredensial Akun Default Demo
 
 | Role | Email | Password | Hak Akses |
 | :--- | :--- | :--- | :--- |
